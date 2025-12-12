@@ -17,3 +17,8 @@ compile_commands.json
 
 # Built demo
 t-poker-noninteractive
+
+# Rust / wasm (mental poker crate)
+rust-wasm-mental-poker/target/
+rust-wasm-mental-poker/pkg/
+**/*.rs.bk
