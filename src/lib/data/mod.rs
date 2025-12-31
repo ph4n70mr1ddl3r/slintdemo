@@ -1,13 +1,20 @@
 // Data Module
 // Exports all data types and provides demo data loading functionality
 
+pub mod benchmarks;
 pub mod capability_demo;
 pub mod category;
+pub mod performance_metric;
 
+pub use benchmarks::{
+    get_comparison_data, get_performance_metrics, get_slint_advantages, ComparisonData,
+    ComparisonResult, SlintAdvantage,
+};
 pub use capability_demo::{
     get_all_demos, get_interactive_demos, CapabilityDemo, DemoValidationError, Difficulty,
 };
 pub use category::{Category, CategoryValidationError};
+pub use performance_metric::{MetricType, MetricValidationError, PerformanceMetric};
 
 /// Load all demo categories
 pub fn load_categories() -> Vec<Category> {

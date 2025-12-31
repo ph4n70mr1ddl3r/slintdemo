@@ -126,25 +126,25 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T3-038 [US3] Write integration test in tests/integration/test_performance_display.rs verifying metrics render
-- [ ] T3-039 [US3] Write integration test in tests/integration/test_comparison_charts.rs verifying comparison data
-- [ ] T3-040 [US3] Write unit test in tests/unit/test_performance_data.rs for performance metric structures
-- [ ] T3-041 [US3] Write browser E2E test in frontend/tests/e2e/test_performance_playwright.spec.ts for animated counters
+- [X] T3-038 [US3] Write integration test in tests/integration/test_performance_display.rs verifying metrics render
+- [X] T3-039 [US3] Write integration test in tests/integration/test_comparison_charts.rs verifying comparison data
+- [X] T3-040 [US3] Write unit test in tests/unit/test_performance_data.rs for performance metric structures
+- [X] T3-041 [US3] Write browser E2E test in frontend/tests/e2e/test_performance_playwright.spec.ts for animated counters
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
 ### Implementation for User Story 3
 
-- [ ] T042 [P] [US3] Create PerformanceMetric entity in src/lib/data/performance_metric.rs
-- [ ] T043 [P] [US3] Create benchmark data in src/lib/data/benchmarks.rs with Slint metrics (startup_time, fps, memory, bundle_size)
-- [ ] T044 [P] [US3] Create Performance Card component in src/lib/components/performance_card.slint
-- [ ] T045 [P] [US3] Create Comparison Chart component in src/lib/components/comparison_chart.slint
-- [ ] T046 [US3] Create Performance Dashboard in src/lib/components/performance_dashboard.slint
-- [ ] T047 [US3] Add animated counters for metric values in performance cards
-- [ ] T048 [US3] Create side-by-side comparison view in comparison_chart.slint (Slint vs React, Slint vs Vue)
-- [ ] T049 [US3] Add benchmark source citations for verification
-- [ ] T050 [US3] Link performance dashboard from main navigation
-- [ ] T051 [US3] Run all US3 tests and verify they pass
+- [X] T042 [P] [US3] Create PerformanceMetric entity in src/lib/data/performance_metric.rs
+- [X] T043 [P] [US3] Create benchmark data in src/lib/data/benchmarks.rs with Slint metrics (startup_time, fps, memory, bundle_size)
+- [X] T044 [P] [US3] Create Performance Card component in src/lib/components/performance_card.slint
+- [X] T045 [P] [US3] Create Comparison Chart component in src/lib/components/comparison_chart.slint
+- [X] T046 [US3] Create Performance Dashboard in src/lib/components/performance_dashboard.slint
+- [X] T047 [US3] Add animated counters for metric values in performance cards
+- [X] T048 [US3] Create side-by-side comparison view in comparison_chart.slint (Slint vs React, Slint vs Vue)
+- [X] T049 [US3] Add benchmark source citations for verification
+- [X] T050 [US3] Link performance dashboard from main navigation
+- [X] T051 [US3] Run all US3 tests and verify they pass
 
 **Checkpoint**: User Story 3 complete - performance evidence visible
 
