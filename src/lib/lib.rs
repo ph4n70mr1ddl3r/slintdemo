@@ -153,7 +153,8 @@ slint::slint! {
                         {id: "interactive", name: "Interactive"},
                         {id: "performance", name: "Performance"},
                         {id: "responsive", name: "Responsive"},
-                        {id: "accessibility", name: "Accessibility"}
+                        {id: "accessibility", name: "Accessibility"},
+                        {id: "playground", name: "Playground"}
                     ]: Button {
                         text: category.name;
                         primary: current-page == category.id;
@@ -571,6 +572,123 @@ slint::slint! {
                         text: "Accessibility Features\n\nKeyboard navigation, screen reader support - coming soon!";
                         font-size: 16px;
                         horizontal-alignment: center;
+                    }
+
+                    if current-page == "playground": VerticalBox {
+                        spacing: 24px;
+
+                        Text {
+                            text: "Code Playground";
+                            font-size: 24px;
+                            font-weight: 700;
+                        }
+
+                        Text {
+                            text: "Learn Slint by editing code examples and seeing results instantly";
+                            font-size: 14px;
+                            color: #666666;
+                        }
+
+                        HorizontalBox {
+                            spacing: 16px;
+
+                            VerticalBox {
+                                spacing: 12px;
+
+                                Text {
+                                    text: "📝 Code Editor";
+                                    font-size: 16px;
+                                    font-weight: 700;
+                                }
+
+                                for example in [
+                                    {id: "hello-component", title: "Your First Component", difficulty: "beginner"},
+                                    {id: "button-styling", title: "Button Styling", difficulty: "beginner"},
+                                    {id: "property-binding", title: "Property Binding", difficulty: "intermediate"},
+                                    {id: "callback-handling", title: "Callback Handling", difficulty: "intermediate"}
+                                ]: Rectangle {
+                                    height: 50px;
+                                    background: rgb(245, 245, 245);
+                                    border-radius: 8px;
+
+                                    HorizontalBox {
+                                        padding: 8px;
+                                        spacing: 8px;
+
+                                        Text {
+                                            text: example.title;
+                                            font-size: 14px;
+                                        }
+
+                                        Rectangle {
+                                            horizontal-stretch: 1;
+                                        }
+
+                                        Text {
+                                            text: example.difficulty == "beginner" ? "🟢" : "🟡";
+                                            font-size: 12px;
+                                        }
+                                    }
+
+                                    TouchArea {
+                                        clicked => { navigate-to-page("example:" + example.id); }
+                                    }
+                                }
+                            }
+
+                            VerticalBox {
+                                spacing: 12px;
+
+                                Text {
+                                    text: "👁️ Preview";
+                                    font-size: 16px;
+                                    font-weight: 700;
+                                }
+
+                                Rectangle {
+                                    background: rgb(30, 30, 30);
+                                    border-radius: 8px;
+                                    min-height: 300px;
+
+                                    VerticalBox {
+                                        padding: 16px;
+
+                                        Text {
+                                            text: "// Preview will appear here";
+                                            font-size: 14px;
+                                            color: #888888;
+                                            font-family: "monospace";
+                                        }
+
+                                        Text {
+                                            text: "// Edit code on the left to see changes";
+                                            font-size: 12px;
+                                            color: #666666;
+                                            font-family: "monospace";
+                                        }
+                                    }
+                                }
+
+                                HorizontalBox {
+                                    spacing: 8px;
+
+                                    Button {
+                                        text: "🔄 Reset";
+                                    }
+
+                                    Button {
+                                        text: "💡 Hint";
+                                    }
+                                }
+                            }
+                        }
+
+                        Text {
+                            text: "💡 Tips: Start with 'Your First Component' to learn the basics";
+                            font-size: 12px;
+                            color: #888888;
+                            horizontal-alignment: center;
+                        }
                     }
                 }
             }

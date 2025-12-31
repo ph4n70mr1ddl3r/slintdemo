@@ -4,6 +4,7 @@
 pub mod benchmarks;
 pub mod capability_demo;
 pub mod category;
+pub mod code_example;
 pub mod performance_metric;
 
 pub use benchmarks::{
@@ -14,6 +15,7 @@ pub use capability_demo::{
     get_all_demos, get_interactive_demos, CapabilityDemo, DemoValidationError, Difficulty,
 };
 pub use category::{Category, CategoryValidationError};
+pub use code_example::{find_example, get_code_examples, CodeExample, ExampleValidationError};
 pub use performance_metric::{MetricType, MetricValidationError, PerformanceMetric};
 
 /// Load all demo categories

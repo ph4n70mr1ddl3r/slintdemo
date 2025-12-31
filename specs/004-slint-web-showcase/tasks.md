@@ -160,25 +160,25 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T4-052 [US4] Write integration test in tests/integration/test_code_editor.rs verifying editor renders
-- [ ] T4-053 [US4] Write integration test in tests/integration/test_code_preview.rs verifying preview updates
-- [ ] T4-054 [US4] Write unit test in tests/unit/test_code_examples.rs for code example structures
-- [ ] T4-055 [US4] Write browser E2E test in frontend/tests/e2e/test_code_playwright.spec.ts for reset functionality
+- [X] T4-052 [US4] Write integration test in tests/integration/test_code_editor.rs verifying editor renders
+- [X] T4-053 [US4] Write integration test in tests/integration/test_code_preview.rs verifying preview updates
+- [X] T4-054 [US4] Write unit test in tests/unit/test_code_examples.rs for code example structures
+- [X] T4-055 [US4] Write browser E2E test in frontend/tests/e2e/test_code_playwright.spec.ts for reset functionality
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
 ### Implementation for User Story 4
 
-- [ ] T056 [P] [US4] Create CodeExample entity in src/lib/data/code_example.rs
-- [ ] T057 [P] [US4] Define code example templates in src/lib/data/examples.rs (hello-component, button-styling, property-binding, callback-handling)
-- [ ] T058 [P] [US4] Create Code Editor component in src/lib/components/code_editor.slint (syntax display area)
-- [ ] T059 [P] [US4] Create Preview Panel component in src/lib/components/preview_panel.slint (live result display)
-- [ ] T060 [US4] Create Split View layout in src/lib/components/split_view.slint (editor left, preview right)
-- [ ] T061 [US4] Implement reset button functionality in code_editor.slint (restore to template)
-- [ ] T062 [US4] Create error display component in src/lib/components/code_error.slint (syntax error messages)
-- [ ] T063 [US4] Add hint system in code_editor.slint (progressive hints for beginners)
-- [ ] T064 [US4] Link code playground from main navigation
-- [ ] T065 [US4] Run all US4 tests and verify they pass
+- [X] T056 [P] [US4] Create CodeExample entity in src/lib/data/code_example.rs
+- [X] T057 [P] [US4] Define code example templates in src/lib/data/examples.rs (hello-component, button-styling, property-binding, callback-handling)
+- [X] T058 [P] [US4] Create Code Editor component in src/lib/components/code_editor.slint (syntax display area)
+- [X] T059 [P] [US4] Create Preview Panel component in src/lib/components/preview_panel.slint (live result display)
+- [X] T060 [US4] Create Split View layout in src/lib/components/split_view.slint (editor left, preview right)
+- [X] T061 [US4] Implement reset button functionality in code_editor.slint (restore to template)
+- [X] T062 [US4] Create error display component in src/lib/components/code_error.slint (syntax error messages)
+- [X] T063 [US4] Add hint system in code_editor.slint (progressive hints for beginners)
+- [X] T064 [US4] Link code playground from main navigation
+- [X] T065 [US4] Run all US4 tests and verify they pass
 
 **Checkpoint**: User Story 4 complete - code playground works
 
