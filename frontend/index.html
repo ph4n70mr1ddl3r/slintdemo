@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slint 1.14 Web Capabilities Showcase</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <header class="showcase-header">
+            <h1>Slint 1.14 Web Capabilities</h1>
+            <p class="subtitle">Interactive demonstrations of modern UI development</p>
+        </header>
+        
+        <main id="showcase-container">
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading showcase...</p>
+            </div>
+        </main>
+        
+        <footer class="showcase-footer">
+            <p>Built with <a href="https://slint.dev">Slint</a> 1.14</p>
+        </footer>
+    </div>
+    
+    <script type="module">
+        import init from './pkg/slint_showcase_lib.js';
+        
+        async function main() {
+            try {
+                await init();
+                console.log('Slint showcase loaded successfully');
+            } catch (e) {
+                console.error('Failed to load Slint showcase:', e);
+                document.querySelector('.loading-state').innerHTML = `
+                    <p class="error">Failed to load showcase. Please use a modern browser with WebAssembly support.</p>
+                `;
+            }
+        }
+        
+        main();
+    </script>
+</body>
+</html>

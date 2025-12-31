@@ -23,3 +23,19 @@ Thumbs.db
 
 # Temporary
 *.tmp
+
+# WebAssembly
+*.wasm
+wasm-pack.lock
+pkg/
+
+# Build artifacts
+*.pdb
+*.dll
+*.exe
+*.lib
+
+# Generated files
+frontend/pkg/
+dist/
+build/

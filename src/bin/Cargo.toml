@@ -1,0 +1,12 @@
+[package]
+name = "slint-showcase"
+version = "0.1.0"
+edition = "2021"
+authors = ["Slint Demo"]
+
+[dependencies]
+slint-showcase-lib = { path = "../lib" }
+
+[[bin]]
+path = "showcase.rs"
+name = "slint-showcase"

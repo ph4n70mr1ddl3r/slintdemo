@@ -1,0 +1,22 @@
+[build]
+target-dir = "target/wasm"
+
+[target.wasm32-unknown-unknown]
+rustflags = [
+    "-C",
+    "link-arg=-s",
+    "-C",
+    "opt-level=z",
+]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+
+[net]
+retry = 5
+git-fetch-with-cli = true
+
+[profile.dev]
+debug = true

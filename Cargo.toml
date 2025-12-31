@@ -1,11 +1,19 @@
+[workspace]
+members = [
+    "src/lib",
+    "src/bin",
+]
+
 [package]
-name = "hello-world"
+name = "slint-showcase"
 version = "0.1.0"
 edition = "2021"
+authors = ["Slint Demo"]
+description = "Web showcase demonstrating Slint 1.14 capabilities"
 
-[lib]
-path = "src/lib.rs"
+[profile.release]
+opt-level = "z"
+lto = true
 
-[dependencies]
-actix-web = "4"
-actix-rt = "2"
+[target.wasm32-unknown-unknown]
+rustflags = ["-C", "link-arg=-s"]

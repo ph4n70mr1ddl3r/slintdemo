@@ -19,13 +19,13 @@
 
 **Purpose**: Project initialization and basic structure for Slint WASM showcase
 
-- [ ] T001 Create project directory structure per plan.md: `src/lib/`, `src/bin/`, `frontend/src/`, `tests/unit/`, `tests/integration/`, `src/assets/demos/`
-- [ ] T002 [P] Initialize Rust library crate in src/lib/ with Cargo.toml including slint = "1.14" dependency
-- [ ] T003 [P] Initialize Rust binary crate in src/bin/showcase.rs with Cargo.toml
-- [ ] T004 Configure wasm32-unknown-unknown target in Cargo.toml with optimal settings (lto = true)
-- [ ] T005 [P] Create frontend/index.html with WASM loader and basic styling structure
-- [ ] T006 [P] Create frontend/styles/main.css with responsive design base styles
-- [ ] T007 Create frontend/src/main.js with wasm-bindgen initialization glue code
+- [X] T001 Create project directory structure per plan.md: `src/lib/`, `src/bin/`, `frontend/src/`, `tests/unit/`, `tests/integration/`, `src/assets/demos/`
+- [X] T002 [P] Initialize Rust library crate in src/lib/ with Cargo.toml including slint = "1.14" dependency
+- [X] T003 [P] Initialize Rust binary crate in src/bin/showcase.rs with Cargo.toml
+- [X] T004 Configure wasm32-unknown-unknown target in Cargo.toml with optimal settings (lto = true)
+- [X] T005 [P] Create frontend/index.html with WASM loader and basic styling structure
+- [X] T006 [P] Create frontend/styles/main.css with responsive design base styles
+- [X] T007 Create frontend/src/main.js with wasm-bindgen initialization glue code
 
 ---
 
@@ -35,14 +35,14 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T008 Create base Slint application component in src/lib/app.slint (main showcase shell)
-- [ ] T009 Implement Application entry point in src/lib/lib.rs using slint::Platform
-- [ ] T010 [P] Create Category entity structure in src/lib/data/category.rs for organizing capabilities
-- [ ] T011 [P] Create CapabilityDemo entity structure in src/lib/data/capability_demo.rs
-- [ ] T012 [P] Create demo data loader in src/lib/data/mod.rs exporting Category and CapabilityDemo types
-- [ ] T013 Create WASM glue initialization in src/wasm/glue.js for browser environment
-- [ ] T014 [P] Configure wasm-bindgen build script in package.json or build.rs
-- [ ] T015 [P] Create .cargo/config.toml with wasm32-unknown-unknown target settings
+- [X] T008 Create base Slint application component in src/lib/app.slint (main showcase shell)
+- [X] T009 Implement Application entry point in src/lib/lib.rs using slint::Platform
+- [X] T010 [P] Create Category entity structure in src/lib/data/category.rs for organizing capabilities
+- [X] T011 [P] Create CapabilityDemo entity structure in src/lib/data/capability_demo.rs
+- [X] T012 [P] Create demo data loader in src/lib/data/mod.rs exporting Category and CapabilityDemo types
+- [X] T013 Create WASM glue initialization in src/wasm/glue.js for browser environment
+- [X] T014 [P] Configure wasm-bindgen build script in package.json or build.rs
+- [X] T015 [P] Create .cargo/config.toml with wasm32-unknown-unknown target settings
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
