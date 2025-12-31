@@ -194,25 +194,25 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T5-066 [US5] Write integration test in tests/integration/test_responsive_layout.rs verifying responsive behavior
-- [ ] T5-067 [US5] Write integration test in tests/integration/test_keyboard_navigation.rs verifying tab navigation
-- [ ] T5-068 [US5] Write unit test in tests/unit/test_responsive_components.rs for responsive containers
-- [ ] T5-069 [US5] Write browser E2E test in frontend/tests/e2e/test_accessibility_playwright.spec.ts for ARIA labels
+- [X] T5-066 [US5] Write integration test in tests/integration/test_responsive_layout.rs verifying responsive behavior
+- [X] T5-067 [US5] Write integration test in tests/integration/test_keyboard_navigation.rs verifying tab navigation
+- [X] T5-068 [US5] Write unit test in tests/unit/test_responsive_components.rs for responsive containers
+- [X] T5-069 [US5] Write browser E2E test in frontend/tests/e2e/test_accessibility_playwright.spec.ts for ARIA labels
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
 ### Implementation for User Story 5
 
-- [ ] T070 [P] [US5] Create Responsive Container component in src/lib/components/responsive_container.slint
-- [ ] T071 [P] [US5] Create Browser Info component in src/lib/components/browser_info.slint (detected browser/version)
-- [ ] T072 [P] [US5] Create Compatibility Check component in src/lib/components/compat_check.slint (feature detection)
-- [ ] T073 [US5] Add media queries in frontend/styles/main.css for responsive breakpoints (mobile, tablet, desktop)
-- [ ] T074 [US5] Update all demo components to use responsive layouts
-- [ ] T075 [US5] Add keyboard navigation support throughout (tab, enter, arrow keys)
-- [ ] T076 [US5] Add ARIA labels and roles for screen readers in all interactive components
-- [ ] T077 [US5] Create accessibility documentation section in app.slint
-- [ ] T078 [US5] Test keyboard navigation and screen reader flow
-- [ ] T079 [US5] Run all US5 tests and verify they pass
+- [X] T070 [P] [US5] Create Responsive Container component in src/lib/components/responsive_container.slint
+- [X] T071 [P] [US5] Create Browser Info component in src/lib/components/browser_info.slint (detected browser/version)
+- [X] T072 [P] [US5] Create Compatibility Check component in src/lib/components/compat_check.slint (feature detection)
+- [X] T073 [US5] Add media queries in frontend/styles/main.css for responsive breakpoints (mobile, tablet, desktop)
+- [X] T074 [US5] Update all demo components to use responsive layouts
+- [X] T075 [US5] Add keyboard navigation support throughout (tab, enter, arrow keys)
+- [X] T076 [US5] Add ARIA labels and roles for screen readers in all interactive components
+- [X] T077 [US5] Create accessibility documentation section in app.slint
+- [X] T078 [US5] Test keyboard navigation and screen reader flow
+- [X] T079 [US5] Run all US5 tests and verify they pass
 
 **Checkpoint**: User Story 5 complete - cross-device compatibility works
 

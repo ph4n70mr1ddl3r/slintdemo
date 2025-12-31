@@ -5,7 +5,9 @@ pub mod benchmarks;
 pub mod capability_demo;
 pub mod category;
 pub mod code_example;
+pub mod keyboard;
 pub mod performance_metric;
+pub mod responsive;
 
 pub use benchmarks::{
     get_comparison_data, get_performance_metrics, get_slint_advantages, ComparisonData,
@@ -16,7 +18,9 @@ pub use capability_demo::{
 };
 pub use category::{Category, CategoryValidationError};
 pub use code_example::{find_example, get_code_examples, CodeExample, ExampleValidationError};
+pub use keyboard::KeyboardShortcut;
 pub use performance_metric::{MetricType, MetricValidationError, PerformanceMetric};
+pub use responsive::{get_responsive_config, ResponsiveBreakpoint, ResponsiveConfig};
 
 /// Load all demo categories
 pub fn load_categories() -> Vec<Category> {
