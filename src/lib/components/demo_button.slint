@@ -1,0 +1,141 @@
+// Button States Demo Component
+// Demonstrates various button states: normal, hover, pressed, disabled, loading
+
+export component DemoButton {
+    in property <string> title: "Button States";
+    
+    // State properties
+    in-out property <bool> is-pressed: false;
+    in-out property <bool> is-hovered: false;
+    in-out property <bool> is-disabled: false;
+    in-out property <bool> is-loading: false;
+    in-out property <int> click-count: 0;
+    
+    // Visual feedback for state changes
+    property <string> feedback-text: "Click a button";
+    property <color> feedback-color: #6b7280;
+    
+    callback handle-click(string state);
+    
+    Rectangle {
+        background: #dbeafe;
+        border-radius: 12px;
+        padding: 20px;
+        
+        VerticalBox {
+            spacing: 16px;
+            
+            // Title
+            Text {
+                text: title;
+                font-size: 18px;
+                font-weight: SemiBold;
+                horizontal-alignment: center;
+                color: #1e40af;
+            }
+            
+            // State indicator
+            Rectangle {
+                background: white;
+                border-radius: 8px;
+                padding: 12px;
+                
+                Text {
+                    text: feedback-text;
+                    font-size: 16px;
+                    color: feedback-color;
+                    horizontal-alignment: center;
+                }
+            }
+            
+            // Button States Row
+            HorizontalBox {
+                spacing: 12px;
+                
+                // Normal button
+                Button {
+                    text: "Normal";
+                    primary: true;
+                    clicked => {
+                        feedback-text = "Normal button clicked!";
+                        feedback-color = #059669;
+                        click-count += 1;
+                    }
+                }
+                
+                // Secondary button
+                Button {
+                    text: "Secondary";
+                    secondary: true;
+                    clicked => {
+                        feedback-text = "Secondary button clicked!";
+                        feedback-color = #2563eb;
+                        click-count += 1;
+                    }
+                }
+                
+                // Tertiary button
+                Button {
+                    text: "Tertiary";
+                    clicked => {
+                        feedback-text = "Tertiary button clicked!";
+                        feedback-color = #7c3aed;
+                        click-count += 1;
+                    }
+                }
+            }
+            
+            // Disabled State Row
+            HorizontalBox {
+                spacing: 12px;
+                
+                Button {
+                    text: "Disabled";
+                    disabled: true;
+                    clicked => {
+                        // This should not fire
+                    }
+                }
+                
+                Button {
+                    text: "Loading";
+                    disabled: is-loading;
+                    clicked => {
+                        is-loading = true;
+                        feedback-text = "Loading...";
+                        feedback-color = #d97706;
+                    }
+                }
+                
+                // Toggle disabled state
+                Button {
+                    text: is-disabled ? "Enable" : "Disable";
+                    secondary: true;
+                    clicked => {
+                        is-disabled = !is-disabled;
+                    }
+                }
+            }
+            
+            // Click counter
+            HorizontalBox {
+                Text {
+                    text: "Total clicks: " + click-count;
+                    font-size: 14px;
+                    color: #666;
+                    vertical-alignment: center;
+                }
+                
+                Button {
+                    text: "Reset";
+                    secondary: true;
+                    clicked => {
+                        click-count = 0;
+                        feedback-text = "Click a button";
+                        feedback-color = #6b7280;
+                    }
+                }
+            }
+        }
+    }
+}

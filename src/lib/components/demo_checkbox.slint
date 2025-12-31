@@ -1,0 +1,172 @@
+// Checkbox Demo Component
+// Demonstrates checkbox group with state management
+
+export component DemoCheckbox {
+    in property <string> title: "Checkbox Group";
+    
+    // Checkbox states
+    in-out property <bool> option-a: false;
+    in-out property <bool> option-b: false;
+    in-out property <bool> option-c: false;
+    in-out property <bool> option-d: false;
+    
+    // Derived state
+    property <int> selected-count: (option-a ? 1 : 0) + (option-b ? 1 : 0) + (option-c ? 1 : 0) + (option-d ? 1 : 0);
+    property <bool> all-selected: selected-count == 4;
+    property <bool> none-selected: selected-count == 0;
+    
+    // Status message
+    property <string> status-message: selected-count + " of 4 selected";
+    property <color> status-color: #6b7280;
+    
+    callback toggle(string option);
+    
+    Rectangle {
+        background: #ede9fe;
+        border-radius: 12px;
+        padding: 20px;
+        
+        VerticalBox {
+            spacing: 16px;
+            
+            // Title
+            Text {
+                text: title;
+                font-size: 18px;
+                font-weight: SemiBold;
+                horizontal-alignment: center;
+                color: #5b21b6;
+            }
+            
+            // Status indicator
+            Rectangle {
+                background: white;
+                border-radius: 8px;
+                padding: 12px;
+                
+                Text {
+                    text: status-message;
+                    font-size: 16px;
+                    font-weight: SemiBold;
+                    color: status-color;
+                    horizontal-alignment: center;
+                }
+            }
+            
+            // Checkbox options
+            VerticalBox {
+                spacing: 8px;
+                
+                // Option A
+                HorizontalBox {
+                    spacing: 12px;
+                    
+                    CheckBox {
+                        checked <=> root.option-a;
+                        clicked => { toggle("a"); }
+                    }
+                    
+                    Text {
+                        text: "Option A - First choice";
+                        font-size: 14px;
+                        color: #374151;
+                        vertical-alignment: center;
+                    }
+                }
+                
+                // Option B
+                HorizontalBox {
+                    spacing: 12px;
+                    
+                    CheckBox {
+                        checked <=> root.option-b;
+                        clicked => { toggle("b"); }
+                    }
+                    
+                    Text {
+                        text: "Option B - Second choice";
+                        font-size: 14px;
+                        color: #374151;
+                        vertical-alignment: center;
+                    }
+                }
+                
+                // Option C
+                HorizontalBox {
+                    spacing: 12px;
+                    
+                    CheckBox {
+                        checked <=> root.option-c;
+                        clicked => { toggle("c"); }
+                    }
+                    
+                    Text {
+                        text: "Option C - Third choice";
+                        font-size: 14px;
+                        color: #374151;
+                        vertical-alignment: center;
+                    }
+                }
+                
+                // Option D
+                HorizontalBox {
+                    spacing: 12px;
+                    
+                    CheckBox {
+                        checked <=> root.option-d;
+                        clicked => { toggle("d"); }
+                    }
+                    
+                    Text {
+                        text: "Option D - Fourth choice";
+                        font-size: 14px;
+                        color: #374151;
+                        vertical-alignment: center;
+                    }
+                }
+            }
+            
+            // Action buttons
+            HorizontalBox {
+                spacing: 8px;
+                
+                Button {
+                    text: "Select All";
+                    primary: true;
+                    clicked => {
+                        option-a = true;
+                        option-b = true;
+                        option-c = true;
+                        option-d = true;
+                    }
+                }
+                
+                Button {
+                    text: "Clear All";
+                    secondary: true;
+                    clicked => {
+                        option-a = false;
+                        option-b = false;
+                        option-c = false;
+                        option-d = false;
+                    }
+                }
+            }
+            
+            // Summary
+            if all-selected: Text {
+                text: "All options selected!";
+                font-size: 14px;
+                color: #059669;
+                horizontal-alignment: center;
+            }
+            
+            if none-selected: Text {
+                text: "No options selected";
+                font-size: 14px;
+                color: #dc2626;
+                horizontal-alignment: center;
+            }
+        }
+    }
+}

@@ -1,11 +1,13 @@
 // Data Module
 // Exports all data types and provides demo data loading functionality
 
-pub mod category;
 pub mod capability_demo;
+pub mod category;
 
+pub use capability_demo::{
+    get_all_demos, get_interactive_demos, CapabilityDemo, DemoValidationError, Difficulty,
+};
 pub use category::{Category, CategoryValidationError};
-pub use capability_demo::{CapabilityDemo, DemoValidationError, Difficulty, get_all_demos, get_interactive_demos};
 
 /// Load all demo categories
 pub fn load_categories() -> Vec<Category> {
@@ -42,15 +44,16 @@ pub fn find_category(category_id: &str) -> Option<Category> {
 /// Validate all loaded data
 pub fn validate_all_data() -> Result<(), DataValidationError> {
     for category in load_categories() {
-        category.validate()
+        category
+            .validate()
             .map_err(|e| DataValidationError::CategoryError(category.id.clone(), e))?;
     }
-    
+
     for demo in load_demos() {
         demo.validate()
             .map_err(|e| DataValidationError::DemoError(demo.id.clone(), e))?;
     }
-    
+
     Ok(())
 }
 

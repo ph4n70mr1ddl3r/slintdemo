@@ -1,0 +1,173 @@
+// Text Input Demo Component
+// Demonstrates text input with validation, binding, and state management
+
+export component DemoText {
+    in property <string> title: "Text Input";
+    
+    // Input state
+    in-out property <string> text-value: "";
+    in-out property <string> filtered-value: "";
+    in-out property <int> char-count: 0;
+    in-out property <int> word-count: 0;
+    
+    // Validation state
+    in property <int> max-chars: 50;
+    
+    // Validation feedback
+    property <bool> is-valid: true;
+    property <string> validation-message: "Start typing...";
+    property <color> validation-color: #6b7280;
+    property <string> last-action: "";
+    
+    callback submit-text(string text);
+    
+    Rectangle {
+        background: #fce7f3;
+        border-radius: 12px;
+        padding: 20px;
+        
+        VerticalBox {
+            spacing: 16px;
+            
+            // Title
+            Text {
+                text: title;
+                font-size: 18px;
+                font-weight: SemiBold;
+                horizontal-alignment: center;
+                color: #9d174d;
+            }
+            
+            // Text Input with validation
+            Rectangle {
+                background: white;
+                border-radius: 8px;
+                padding: 16px;
+                
+                VerticalBox {
+                    spacing: 8px;
+                    
+                    // Input field
+                    TextInput {
+                        text <=> root.text-value;
+                        placeholder-text: "Type something...";
+                        font-size: 16px;
+                        width: parent.width;
+                        height: 48px;
+                        
+                        edited(text) => {
+                            char-count = text.length;
+                            word-count = text.split(" ").length;
+                            last-action = "edited";
+                            
+                            if (char-count > max-chars) {
+                                is-valid = false;
+                                validation-message = "Too long! (" + char-count + "/" + max-chars + ")";
+                                validation-color = #dc2626;
+                            } else if (char-count == 0) {
+                                is-valid = true;
+                                validation-message = "Start typing...";
+                                validation-color = #6b7280;
+                            } else {
+                                is-valid = true;
+                                validation-message = "Valid input";
+                                validation-color = #059669;
+                            }
+                        }
+                    }
+                    
+                    // Validation feedback
+                    Text {
+                        text: validation-message;
+                        font-size: 12px;
+                        color: validation-color;
+                    }
+                }
+            }
+            
+            // Statistics Row
+            HorizontalBox {
+                spacing: 16px;
+                
+                Rectangle {
+                    background: white;
+                    border-radius: 6px;
+                    padding: 8px 12px;
+                    
+                    Text {
+                        text: "Chars: " + char-count + "/" + max-chars;
+                        font-size: 14px;
+                        color: char-count > max-chars ? #dc2626 : #374151;
+                    }
+                }
+                
+                Rectangle {
+                    background: white;
+                    border-radius: 6px;
+                    padding: 8px 12px;
+                    
+                    Text {
+                        text: "Words: " + word-count;
+                        font-size: 14px;
+                        color: #374151;
+                    }
+                }
+            }
+            
+            // Action buttons
+            HorizontalBox {
+                spacing: 8px;
+                
+                Button {
+                    text: "Uppercase";
+                    primary: true;
+                    clicked => {
+                        filtered-value = text-value.to-uppercase();
+                        last-action = "uppercase";
+                        validation-message = "Converted to uppercase";
+                        validation-color = #2563eb;
+                    }
+                }
+                
+                Button {
+                    text: "Lowercase";
+                    primary: true;
+                    clicked => {
+                        filtered-value = text-value.to-lower-case();
+                        last-action = "lowercase";
+                        validation-message = "Converted to lowercase";
+                        validation-color = #2563eb;
+                    }
+                }
+                
+                Button {
+                    text: "Clear";
+                    secondary: true;
+                    clicked => {
+                        text-value = "";
+                        filtered-value = "";
+                        char-count = 0;
+                        word-count = 0;
+                        last-action = "clear";
+                        validation-message = "Cleared";
+                        validation-color = #6b7280;
+                    }
+                }
+            }
+            
+            // Live preview of filtered value
+            if filtered-value != "": Rectangle {
+                background: #f3f4f6;
+                border-radius: 6px;
+                padding: 8px;
+                
+                Text {
+                    text: "Preview: " + filtered-value;
+                    font-size: 12px;
+                    color: #6b7280;
+                    font-style: italic;
+                }
+            }
+        }
+    }
+}

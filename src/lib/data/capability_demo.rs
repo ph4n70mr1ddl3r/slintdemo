@@ -60,7 +60,7 @@ impl CapabilityDemo {
             estimated_time: 2,
         }
     }
-    
+
     /// Validate demo has required non-empty fields
     pub fn validate(&self) -> Result<(), DemoValidationError> {
         if self.id.is_empty() {
@@ -75,19 +75,19 @@ impl CapabilityDemo {
             Ok(())
         }
     }
-    
+
     /// Set difficulty level
     pub fn with_difficulty(mut self, difficulty: Difficulty) -> Self {
         self.difficulty = difficulty;
         self
     }
-    
+
     /// Set estimated time
     pub fn with_estimated_time(mut self, minutes: u32) -> Self {
         self.estimated_time = minutes;
         self
     }
-    
+
     /// Set parameters
     pub fn with_parameters(mut self, params: HashMap<String, String>) -> Self {
         self.parameters = Some(params);
@@ -116,80 +116,90 @@ pub fn get_interactive_demos() -> Vec<CapabilityDemo> {
             "Demonstrates simple state management with increment/decrement",
             "interactive",
             "demos/counter.slint",
-        ).with_difficulty(Difficulty::Beginner)
-         .with_estimated_time(2),
-        
+        )
+        .with_difficulty(Difficulty::Beginner)
+        .with_estimated_time(2),
         CapabilityDemo::new(
             "button-states",
             "Button States",
             "Shows different button states: normal, pressed, disabled",
             "interactive",
             "demos/button-states.slint",
-        ).with_difficulty(Difficulty::Beginner)
-         .with_estimated_time(3),
-        
+        )
+        .with_difficulty(Difficulty::Beginner)
+        .with_estimated_time(3),
         CapabilityDemo::new(
             "slider",
             "Interactive Slider",
             "Two-way data binding with slider component",
             "interactive",
             "demos/slider.slint",
-        ).with_difficulty(Difficulty::Beginner)
-         .with_estimated_time(3),
-        
+        )
+        .with_difficulty(Difficulty::Beginner)
+        .with_estimated_time(3),
         CapabilityDemo::new(
             "text-input",
             "Text Input",
             "Form input with validation and state binding",
             "interactive",
             "demos/text-input.slint",
-        ).with_difficulty(Difficulty::Intermediate)
-         .with_estimated_time(5),
-         
+        )
+        .with_difficulty(Difficulty::Intermediate)
+        .with_estimated_time(5),
         CapabilityDemo::new(
             "checkbox",
             "Checkbox Group",
             "Multiple selection with state management",
             "interactive",
             "demos/checkbox.slint",
-        ).with_difficulty(Difficulty::Beginner)
-         .with_estimated_time(3),
+        )
+        .with_difficulty(Difficulty::Beginner)
+        .with_estimated_time(3),
     ]
 }
 
 /// Get all demos for the showcase
 pub fn get_all_demos() -> Vec<CapabilityDemo> {
     let mut demos = get_interactive_demos();
-    
+
     // Add performance demos
-    demos.push(CapabilityDemo::new(
-        "animations",
-        "Smooth Animations",
-        "60fps animations with Slint's animation system",
-        "performance",
-        "demos/animations.slint",
-    ).with_difficulty(Difficulty::Intermediate)
-     .with_estimated_time(5));
-    
+    demos.push(
+        CapabilityDemo::new(
+            "animations",
+            "Smooth Animations",
+            "60fps animations with Slint's animation system",
+            "performance",
+            "demos/animations.slint",
+        )
+        .with_difficulty(Difficulty::Intermediate)
+        .with_estimated_time(5),
+    );
+
     // Add responsive demos
-    demos.push(CapabilityDemo::new(
-        "layout-grid",
-        "Responsive Grid",
-        "CSS-like grid layouts that adapt to screen size",
-        "responsive",
-        "demos/layout-grid.slint",
-    ).with_difficulty(Difficulty::Intermediate)
-     .with_estimated_time(5));
-    
+    demos.push(
+        CapabilityDemo::new(
+            "layout-grid",
+            "Responsive Grid",
+            "CSS-like grid layouts that adapt to screen size",
+            "responsive",
+            "demos/layout-grid.slint",
+        )
+        .with_difficulty(Difficulty::Intermediate)
+        .with_estimated_time(5),
+    );
+
     // Add accessibility demos
-    demos.push(CapabilityDemo::new(
-        "keyboard-nav",
-        "Keyboard Navigation",
-        "Full keyboard accessibility support",
-        "accessibility",
-        "demos/keyboard-nav.slint",
-    ).with_difficulty(Difficulty::Beginner)
-     .with_estimated_time(3));
-    
+    demos.push(
+        CapabilityDemo::new(
+            "keyboard-nav",
+            "Keyboard Navigation",
+            "Full keyboard accessibility support",
+            "accessibility",
+            "demos/keyboard-nav.slint",
+        )
+        .with_difficulty(Difficulty::Beginner)
+        .with_estimated_time(3),
+    );
+
     demos
 }

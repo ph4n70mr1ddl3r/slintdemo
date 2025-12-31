@@ -1,0 +1,134 @@
+// Slider Demo Component
+// Demonstrates two-way data binding with slider component
+
+export component DemoSlider {
+    in property <string> title: "Interactive Slider";
+    
+    // Slider state with two-way binding
+    in-out property <int> slider-value: 50;
+    in property <int> min-value: 0;
+    in property <int> max-value: 100;
+    in property <int> step: 1;
+    
+    // Derived values
+    property <float> percentage: (slider-value - min-value) * 100 / (max-value - min-value);
+    property <string> value-display: slider-value;
+    
+    // Visual feedback
+    property <color> slider-color: #2563eb;
+    property <color> track-color: #e5e7eb;
+    
+    callback value-changed(int value);
+    
+    Rectangle {
+        background: #d1fae5;
+        border-radius: 12px;
+        padding: 20px;
+        
+        VerticalBox {
+            spacing: 16px;
+            
+            // Title
+            Text {
+                text: title;
+                font-size: 18px;
+                font-weight: SemiBold;
+                horizontal-alignment: center;
+                color: #065f46;
+            }
+            
+            // Value Display
+            Rectangle {
+                background: white;
+                border-radius: 50%;
+                width: 80px;
+                height: 80px;
+                
+                Text {
+                    text: value-display;
+                    font-size: 32px;
+                    font-weight: Bold;
+                    color: slider-color;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                }
+            }
+            
+            // Slider with visual feedback
+            VerticalBox {
+                spacing: 8px;
+                
+                // Track
+                Rectangle {
+                    background: track-color;
+                    height: 8px;
+                    border-radius: 4px;
+                    
+                    // Filled portion
+                    Rectangle {
+                        background: slider-color;
+                        width: parent.width * percentage / 100;
+                        height: parent.height;
+                        border-radius: 4px;
+                    }
+                }
+                
+                // Slider handle
+                Slider {
+                    value <=> root.slider-value;
+                    min-value: root.min-value;
+                    max-value: root.max-value;
+                    step: root.step;
+                    width: parent.width;
+                    height: 24px;
+                    
+                    changed(value) => {
+                        value-changed(value);
+                    }
+                }
+            }
+            
+            // Min/Max Labels
+            HorizontalBox {
+                Text {
+                    text: min-value;
+                    font-size: 12px;
+                    color: #6b7280;
+                }
+                
+                HorizontalBox {
+                    horizontal-stretch: 1;
+                }
+                
+                Text {
+                    text: max-value;
+                    font-size: 12px;
+                    color: #6b7280;
+                }
+            }
+            
+            // Quick select buttons
+            HorizontalBox {
+                spacing: 8px;
+                
+                for val in [0, 25, 50, 75, 100]: Button {
+                    text: val;
+                    width: 40px;
+                    height: 36px;
+                    secondary: true;
+                    clicked => {
+                        slider-value = val;
+                    }
+                }
+            }
+            
+            // Percentage display
+            Text {
+                text: Math.round(percentage) + "%";
+                font-size: 14px;
+                color: #059669;
+                horizontal-alignment: center;
+            }
+        }
+    }
+}

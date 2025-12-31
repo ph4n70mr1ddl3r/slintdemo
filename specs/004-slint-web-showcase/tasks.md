@@ -58,24 +58,24 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T1-010 [US1] Write integration test in tests/integration/test_demo_navigation.rs verifying demo list renders
-- [ ] T1-011 [US1] Write integration test in tests/integration/test_demo_interaction.rs verifying counter demo increments
-- [ ] T1-012 [US1] Write unit test in tests/unit/test_demo_components.rs for demo component state management
-- [ ] T1-013 [US1] Write browser E2E test in frontend/tests/e2e/test_demo_playwright.spec.ts for visual feedback
+- [X] T1-010 [US1] Write integration test in tests/integration/test_demo_navigation.rs verifying demo list renders
+- [X] T1-011 [US1] Write integration test in tests/integration/test_demo_interaction.rs verifying counter demo increments
+- [X] T1-012 [US1] Write unit test in tests/unit/test_demo_components.rs for demo component state management
+- [X] T1-013 [US1] Write browser E2E test in frontend/tests/e2e/test_demo_playwright.spec.ts for visual feedback
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
 ### Implementation for User Story 1
 
-- [ ] T014 [P] [US1] Create first demo component in src/lib/components/demo_counter.slint (button incrementing counter)
-- [ ] T015 [P] [US1] Create second demo component in src/lib/components/demo_button.slint (various button states)
-- [ ] T016 [P] [US1] Create third demo component in src/lib/components/demo_text.slint (text input and display)
-- [ ] T017 [P] [US1] Create fourth demo component in src/lib/components/demo_slider.slint (value slider with binding)
-- [ ] T018 [P] [US1] Create fifth demo component in src/lib/components/demo_checkbox.slint (checkbox with state)
-- [ ] T019 [US1] Create demo registry in src/lib/data/demos.rs mapping demo IDs to components
-- [ ] T020 [US1] Implement demo viewer component in src/lib/components/demo_viewer.slint (navigation and display)
-- [ ] T021 [US1] Update app.slint to include demo navigation sidebar and viewer area
-- [ ] T022 [US1] Add visual feedback animations in demo components for state changes
+- [X] T014 [P] [US1] Create first demo component in src/lib/components/demo_counter.slint (button incrementing counter)
+- [X] T015 [P] [US1] Create second demo component in src/lib/components/demo_button.slint (various button states)
+- [X] T016 [P] [US1] Create third demo component in src/lib/components/demo_text.slint (text input and display)
+- [X] T017 [P] [US1] Create fourth demo component in src/lib/components/demo_slider.slint (value slider with binding)
+- [X] T018 [P] [US1] Create fifth demo component in src/lib/components/demo_checkbox.slint (checkbox with state)
+- [X] T019 [US1] Create demo registry in src/lib/data/demos.rs mapping demo IDs to components
+- [X] T020 [US1] Implement demo viewer component in src/lib/components/demo_viewer.slint (navigation and display)
+- [X] T021 [US1] Update app.slint to include demo navigation sidebar and viewer area
+- [X] T022 [US1] Add visual feedback animations in demo components for state changes
 - [ ] T023 [US1] Run all US1 tests and verify they pass
 
 **Checkpoint**: User Story 1 complete - interactive demonstrations work

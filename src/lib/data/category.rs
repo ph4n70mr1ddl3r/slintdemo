@@ -19,7 +19,12 @@ pub struct Category {
 
 impl Category {
     /// Create a new category with required fields
-    pub fn new(id: impl Into<String>, name: impl Into<String>, description: impl Into<String>, display_order: u32) -> Self {
+    pub fn new(
+        id: impl Into<String>,
+        name: impl Into<String>,
+        description: impl Into<String>,
+        display_order: u32,
+    ) -> Self {
         Self {
             id: id.into(),
             name: name.into(),
@@ -28,7 +33,7 @@ impl Category {
             icon: None,
         }
     }
-    
+
     /// Validate category has required non-empty fields
     pub fn validate(&self) -> Result<(), CategoryValidationError> {
         if self.id.is_empty() {
@@ -65,25 +70,29 @@ pub fn get_showcase_categories() -> Vec<Category> {
             "Interactive Demos",
             "Hands-on demonstrations of Slint's reactive UI capabilities",
             1,
-        ).with_icon("🎮"),
+        )
+        .with_icon("🎮"),
         Category::new(
             "performance",
             "Performance",
             "Speed and efficiency benchmarks",
             2,
-        ).with_icon("⚡"),
+        )
+        .with_icon("⚡"),
         Category::new(
             "responsive",
             "Responsive Design",
             "Layouts that adapt to any screen size",
             3,
-        ).with_icon("📱"),
+        )
+        .with_icon("📱"),
         Category::new(
             "accessibility",
             "Accessibility",
             "Inclusive design with keyboard and screen reader support",
             4,
-        ).with_icon("♿"),
+        )
+        .with_icon("♿"),
     ]
 }
 

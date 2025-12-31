@@ -1,0 +1,130 @@
+// Counter Demo Component
+// Demonstrates simple state management with increment/decrement
+
+export component DemoCounter {
+    in-out property <int> counter: 0;
+    in property <int> min-value: 0;
+    in property <int> max-value: 100;
+    in property <string> title: "Counter";
+    in property <string> button-text: "Increment";
+    
+    callback increment();
+    callback decrement();
+    callback reset();
+    
+    // Visual feedback states
+    property <bool> is-incrementing: false;
+    property <bool> is-decrementing: false;
+    
+    // Animation for feedback
+    property <float> scale-factor: 1.0;
+    
+    Rectangle {
+        background: #fef3c7;
+        border-radius: 12px;
+        padding: 20px;
+        
+        VerticalBox {
+            spacing: 16px;
+            
+            // Title
+            Text {
+                text: title;
+                font-size: 18px;
+                font-weight: SemiBold;
+                horizontal-alignment: center;
+                color: #92400e;
+            }
+            
+            // Counter Display with animation
+            Rectangle {
+                background: white;
+                border-radius: 8px;
+                padding: 24px;
+                clip: true;
+                
+                Text {
+                    text: counter;
+                    font-size: 48px;
+                    font-weight: Bold;
+                    color: #2563eb;
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                    
+                    // Scale animation on value change
+                    scale-x: scale-factor;
+                    scale-y: scale-factor;
+                }
+            }
+            
+            // Control Buttons
+            HorizontalBox {
+                spacing: 12px;
+                
+                Button {
+                    text: "-";
+                    primary: true;
+                    width: 60px;
+                    height: 48px;
+                    font-size: 24px;
+                    clicked => {
+                        if (counter > min-value) {
+                            counter -= 1;
+                            is-decrementing = true;
+                            is-incrementing = false;
+                        }
+                    }
+                }
+                
+                Button {
+                    text: "+";
+                    primary: true;
+                    width: 60px;
+                    height: 48px;
+                    font-size: 24px;
+                    clicked => {
+                        if (counter < max-value) {
+                            counter += 1;
+                            is-incrementing = true;
+                            is-decrementing = false;
+                        }
+                    }
+                }
+            }
+            
+            // Additional Controls
+            HorizontalBox {
+                spacing: 8px;
+                
+                Button {
+                    text: "Reset";
+                    secondary: true;
+                    clicked => {
+                        counter = 0;
+                        is-incrementing = false;
+                        is-decrementing = false;
+                    }
+                }
+                
+                // Display range info
+                Text {
+                    text: "Range: " + min-value + " - " + max-value;
+                    font-size: 12px;
+                    color: #666;
+                    vertical-alignment: center;
+                }
+            }
+            
+            // Visual feedback indicator
+            if is-incrementing or is-decrementing: Rectangle {
+                background: #059669;
+                height: 4px;
+                border-radius: 2px;
+                
+                // Animate width based on state
+                width: parent.width * 0.3;
+                x: is-incrementing ? parent.width * 0.7 : 0;
+            }
+        }
+    }
+}

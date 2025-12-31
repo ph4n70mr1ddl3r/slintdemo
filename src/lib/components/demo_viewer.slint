@@ -1,0 +1,115 @@
+// Demo Viewer Component
+// Navigation and display area for demos
+
+export component DemoViewer {
+    in property <string> current-demo: "";
+    in property <[string]> available-demos: ["counter", "button-states", "text-input", "slider", "checkbox"];
+    
+    // Demo state for communication
+    in-out property <int> counter-value: 0;
+    in-out property <string> slider-value: "50";
+    in-out property <string> text-input-value: "";
+    in-out property <bool> checkbox-a: false;
+    in-out property <bool> checkbox-b: false;
+    in-out property <bool> checkbox-c: false;
+    in-out property <bool> checkbox-d: false;
+    
+    callback demo-selected(string demo-id);
+    callback demo-completed(string demo-id);
+    
+    // Demo navigation
+    property <int> current-index: 0;
+    
+    Rectangle {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        
+        VerticalBox {
+            spacing: 16px;
+            
+            // Demo navigation header
+            HorizontalBox {
+                height: 48px;
+                background: #f3f4f6;
+                border-radius: 8px;
+                padding: 8px;
+                
+                for demo-id in available-demos: Button {
+                    text: demo-id.replace("-", " ").to-title-case();
+                    primary: current-demo == demo-id;
+                    secondary: current-demo != demo-id;
+                    width: 120px;
+                    clicked => {
+                        demo-selected(demo-id);
+                    }
+                }
+            }
+            
+            // Demo content area
+            VerticalBox {
+                clip: true;
+                
+                // Counter Demo
+                if current-demo == "counter": DemoCounter {
+                    title: "Counter Demo";
+                    counter <=> root.counter-value;
+                }
+                
+                // Button States Demo
+                if current-demo == "button-states": DemoButton {
+                    title: "Button States";
+                }
+                
+                // Text Input Demo
+                if current-demo == "text-input": DemoText {
+                    title: "Text Input Demo";
+                    text-value <=> root.text-input-value;
+                }
+                
+                // Slider Demo
+                if current-demo == "slider": DemoSlider {
+                    title: "Interactive Slider";
+                    slider-value: root.slider-value == "" ? 50 : root.slider-value.to-int();
+                }
+                
+                // Checkbox Demo
+                if current-demo == "checkbox": DemoCheckbox {
+                    title: "Checkbox Group";
+                    option-a <=> root.checkbox-a;
+                    option-b <=> root.checkbox-b;
+                    option-c <=> root.checkbox-c;
+                    option-d <=> root.checkbox-d;
+                }
+            }
+            
+            // Demo completion status
+            HorizontalBox {
+                Text {
+                    text: "Current: " + (current-demo == "" ? "None" : current-demo.replace("-", " ").to-title-case());
+                    font-size: 12px;
+                    color: #6b7280;
+                    vertical-alignment: center;
+                }
+                
+                HorizontalBox {
+                    horizontal-stretch: 1;
+                }
+                
+                Button {
+                    text: "Reset All";
+                    secondary: true;
+                    clicked => {
+                        counter-value = 0;
+                        slider-value = "50";
+                        text-input-value = "";
+                        checkbox-a = false;
+                        checkbox-b = false;
+                        checkbox-c = false;
+                        checkbox-d = false;
+                    }
+                }
+            }
+        }
+    }
+}
