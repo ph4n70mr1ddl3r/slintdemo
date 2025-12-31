@@ -58,10 +58,10 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T010 [US1] Write integration test in tests/integration/test_demo_navigation.rs verifying demo list renders
-- [ ] T011 [US1] Write integration test in tests/integration/test_demo_interaction.rs verifying counter demo increments
-- [ ] T012 [US1] Write unit test in tests/unit/test_demo_components.rs for demo component state management
-- [ ] T013 [US1] Write browser E2E test in frontend/tests/e2e/test_demo_playwright.spec.ts for visual feedback
+- [ ] T1-010 [US1] Write integration test in tests/integration/test_demo_navigation.rs verifying demo list renders
+- [ ] T1-011 [US1] Write integration test in tests/integration/test_demo_interaction.rs verifying counter demo increments
+- [ ] T1-012 [US1] Write unit test in tests/unit/test_demo_components.rs for demo component state management
+- [ ] T1-013 [US1] Write browser E2E test in frontend/tests/e2e/test_demo_playwright.spec.ts for visual feedback
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
@@ -92,10 +92,10 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T024 [US2] Write integration test in tests/integration/test_category_navigation.rs verifying categories render
-- [ ] T025 [US2] Write integration test in tests/integration/test_capability_selection.rs verifying demo navigation
-- [ ] T026 [US2] Write unit test in tests/unit/test_catalog_data.rs for category data structures
-- [ ] T027 [US2] Write browser E2E test in frontend/tests/e2e/test_catalog_playwright.spec.ts for category filtering
+- [ ] T2-024 [US2] Write integration test in tests/integration/test_category_navigation.rs verifying categories render
+- [ ] T2-025 [US2] Write integration test in tests/integration/test_capability_selection.rs verifying demo navigation
+- [ ] T2-026 [US2] Write unit test in tests/unit/test_catalog_data.rs for category data structures
+- [ ] T2-027 [US2] Write browser E2E test in frontend/tests/e2e/test_catalog_playwright.spec.ts for category filtering
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
@@ -126,10 +126,10 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T038 [US3] Write integration test in tests/integration/test_performance_display.rs verifying metrics render
-- [ ] T039 [US3] Write integration test in tests/integration/test_comparison_charts.rs verifying comparison data
-- [ ] T040 [US3] Write unit test in tests/unit/test_performance_data.rs for performance metric structures
-- [ ] T041 [US3] Write browser E2E test in frontend/tests/e2e/test_performance_playwright.spec.ts for animated counters
+- [ ] T3-038 [US3] Write integration test in tests/integration/test_performance_display.rs verifying metrics render
+- [ ] T3-039 [US3] Write integration test in tests/integration/test_comparison_charts.rs verifying comparison data
+- [ ] T3-040 [US3] Write unit test in tests/unit/test_performance_data.rs for performance metric structures
+- [ ] T3-041 [US3] Write browser E2E test in frontend/tests/e2e/test_performance_playwright.spec.ts for animated counters
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
@@ -160,10 +160,10 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T052 [US4] Write integration test in tests/integration/test_code_editor.rs verifying editor renders
-- [ ] T053 [US4] Write integration test in tests/integration/test_code_preview.rs verifying preview updates
-- [ ] T054 [US4] Write unit test in tests/unit/test_code_examples.rs for code example structures
-- [ ] T055 [US4] Write browser E2E test in frontend/tests/e2e/test_code_playwright.spec.ts for reset functionality
+- [ ] T4-052 [US4] Write integration test in tests/integration/test_code_editor.rs verifying editor renders
+- [ ] T4-053 [US4] Write integration test in tests/integration/test_code_preview.rs verifying preview updates
+- [ ] T4-054 [US4] Write unit test in tests/unit/test_code_examples.rs for code example structures
+- [ ] T4-055 [US4] Write browser E2E test in frontend/tests/e2e/test_code_playwright.spec.ts for reset functionality
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
@@ -194,10 +194,10 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T066 [US5] Write integration test in tests/integration/test_responsive_layout.rs verifying responsive behavior
-- [ ] T067 [US5] Write integration test in tests/integration/test_keyboard_navigation.rs verifying tab navigation
-- [ ] T068 [US5] Write unit test in tests/unit/test_responsive_components.rs for responsive containers
-- [ ] T069 [US5] Write browser E2E test in frontend/tests/e2e/test_accessibility_playwright.spec.ts for ARIA labels
+- [ ] T5-066 [US5] Write integration test in tests/integration/test_responsive_layout.rs verifying responsive behavior
+- [ ] T5-067 [US5] Write integration test in tests/integration/test_keyboard_navigation.rs verifying tab navigation
+- [ ] T5-068 [US5] Write unit test in tests/unit/test_responsive_components.rs for responsive containers
+- [ ] T5-069 [US5] Write browser E2E test in frontend/tests/e2e/test_accessibility_playwright.spec.ts for ARIA labels
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
@@ -325,16 +325,16 @@ With multiple developers:
 | Metric | Value |
 |--------|-------|
 | **Total Tasks** | 92 |
-| **Test Tasks** | 16 (4 per user story) |
+| **Test Tasks** | 16 (4 per user story, phase-prefixed T1-xxx through T5-xxx for uniqueness) |
 | **Implementation Tasks** | 68 |
 | **CI/Polish Tasks** | 8 |
 | **Setup Phase** | 7 tasks |
 | **Foundational Phase** | 8 tasks |
-| **User Story 1** | 18 tasks (4 tests + 10 impl + 4 verify) |
-| **User Story 2** | 18 tasks (4 tests + 10 impl + 4 verify) |
-| **User Story 3** | 18 tasks (4 tests + 10 impl + 4 verify) |
-| **User Story 4** | 18 tasks (4 tests + 10 impl + 4 verify) |
-| **User Story 5** | 18 tasks (4 tests + 10 impl + 4 verify) |
+| **User Story 1** | 18 tasks (4 tests T1-010~T1-013 + 10 impl + 4 verify) |
+| **User Story 2** | 18 tasks (4 tests T2-024~T2-027 + 10 impl + 4 verify) |
+| **User Story 3** | 18 tasks (4 tests T3-038~T3-041 + 10 impl + 4 verify) |
+| **User Story 4** | 18 tasks (4 tests T4-052~T4-055 + 10 impl + 4 verify) |
+| **User Story 5** | 18 tasks (4 tests T5-066~T5-069 + 10 impl + 4 verify) |
 | **Polish Phase** | 14 tasks |
 | **Parallel Tasks** | ~45 (marked with [P]) |
 
