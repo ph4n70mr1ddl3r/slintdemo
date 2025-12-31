@@ -2,25 +2,133 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main, master]
   pull_request:
-    branches: [ main ]
+    branches: [main, master]
+
+env:
+  CARGO_TERM_COLOR: always
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Build
-      run: cargo build --release
+      - name: Install Rust
+        run: |
+          rustup default stable
+          rustc --version
+          cargo --version
 
-    - name: Run tests
-      run: cargo test
+      - name: Add wasm32-unknown-unknown target
+        run: rustup target add wasm32-unknown-unknown
 
-    - name: Check formatting
-      run: cargo fmt -- --check
+      - name: Install wasm-bindgen-cli
+        run: cargo install wasm-bindgen-cli
 
-    - name: Run clippy
-      run: cargo clippy -- -D warnings
+      - name: Build (native)
+        run: cargo build --release
+
+      - name: Build (WASM)
+        run: cargo build --target wasm32-unknown-unknown --release
+
+      - name: Generate WASM bindings
+        run: wasm-bindgen --out-dir frontend/pkg --target web target/wasm32-unknown-unknown/release/slint_showcase.wasm
+
+      - name: Run Clippy
+        run: cargo clippy --all-features --all-targets -- -D warnings
+
+      - name: Run fmt
+        run: cargo fmt --all -- --check
+
+      - name: Run tests (native)
+        run: cargo test --all-targets
+
+      - name: Run tests (WASM)
+        run: cargo test --target wasm32-unknown-unknown
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        run: rustup default stable
+
+      - name: Run Clippy
+        run: cargo clippy --all-features --all-targets -- -D warnings
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+  accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Build and serve frontend
+        run: |
+          npm install -g serve
+          serve frontend -l 3000 &
+          sleep 3
+
+      - name: Run accessibility audit with axe
+        run: |
+          cat << 'EOF' > /tmp/a11y-test.js
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            await page.goto('http://localhost:3000');
+            const results = await page.evaluate(async () => {
+              const axe = await import('axe-core');
+              return await axe.default.run(document);
+            });
+            console.log('Violations:', results.violations.length);
+            if (results.violations.length > 0) {
+              console.log(JSON.stringify(results.violations, null, 2));
+            }
+            await browser.close();
+            process.exit(results.violations.length > 0 ? 1 : 0);
+          })();
+          EOF
+          npm init -y && npm install axe-core playwright
+          node /tmp/a11y-test.js
+        continue-on-error: true
+
+  deploy:
+    needs: [build, lint]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build WASM
+        run: |
+          rustup default stable
+          rustup target add wasm32-unknown-unknown
+          cargo install wasm-bindgen-cli
+          cargo build --target wasm32-unknown-unknown --release
+          wasm-bindgen --out-dir dist/pkg --target web target/wasm32-unknown-unknown/release/slint_showcase.wasm
+
+      - name: Copy frontend assets
+        run: |
+          cp frontend/index.html dist/
+          cp -r frontend/styles dist/
+          cp -r frontend/pkg dist/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

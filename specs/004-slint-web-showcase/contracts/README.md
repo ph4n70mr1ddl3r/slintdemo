@@ -1,0 +1,1 @@
+# API Contracts\n\nNo external API contracts required - this is a static showcase with client-side interactivity.\n\nCode examples use server-side compilation (implementation detail, not part of feature specification).\n

@@ -3,6 +3,7 @@
 Auto-generated from all feature plans. Last updated: 2025-12-31
 
 ## Active Technologies
+- N/A - Static showcase content served from web server (004-slint-web-showcase)
 
 - Rust (latest stable) + Actix-web (lightweight, high-performance web framework) (001-rust-web-hello)
 
@@ -23,6 +24,7 @@ cargo test [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECH
 Rust (latest stable): Follow standard conventions
 
 ## Recent Changes
+- 004-slint-web-showcase: Added N/A - Static showcase content served from web server
 
 - 001-rust-web-hello: Added Rust (latest stable) + Actix-web (lightweight, high-performance web framework)
 
