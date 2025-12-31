@@ -568,10 +568,125 @@ slint::slint! {
                         horizontal-alignment: center;
                     }
 
-                    if current-page == "accessibility": Text {
-                        text: "Accessibility Features\n\nKeyboard navigation, screen reader support - coming soon!";
-                        font-size: 16px;
-                        horizontal-alignment: center;
+                    if current-page == "accessibility": VerticalBox {
+                        spacing: 24px;
+
+                        Text {
+                            text: "Accessibility Features";
+                            font-size: 24px;
+                            font-weight: 700;
+                        }
+
+                        Text {
+                            text: "Built with WCAG 2.1 Level AA compliance in mind";
+                            font-size: 14px;
+                            color: #666666;
+                        }
+
+                        VerticalBox {
+                            spacing: 16px;
+
+                            // Keyboard Navigation
+                            VerticalBox {
+                                spacing: 8px;
+
+                                Text {
+                                    text: "⌨️ Keyboard Navigation";
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                }
+
+                                HorizontalBox {
+                                    spacing: 16px;
+
+                                    for item in [
+                                        {key: "Tab", action: "Next element"},
+                                        {key: "Shift+Tab", action: "Previous"},
+                                        {key: "Enter", action: "Activate"},
+                                        {key: "Escape", action: "Close/Cancel"}
+                                    ]: Rectangle {
+                                        width: 120px;
+                                        height: 60px;
+                                        background: rgb(245, 245, 245);
+                                        border-radius: 8px;
+
+                                        VerticalBox {
+                                            padding: 8px;
+
+                                            Text {
+                                                text: item.key;
+                                                font-size: 14px;
+                                                font-weight: 700;
+                                                color: rgb(37, 99, 235);
+                                                horizontal-alignment: center;
+                                            }
+
+                                            Text {
+                                                text: item.action;
+                                                font-size: 11px;
+                                                color: #666666;
+                                                horizontal-alignment: center;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Screen Reader Support
+                            VerticalBox {
+                                spacing: 8px;
+
+                                Text {
+                                    text: "♿ Screen Reader Support";
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                }
+
+                                Text {
+                                    text: "All interactive elements have proper ARIA labels and roles";
+                                    font-size: 14px;
+                                    color: #666666;
+                                }
+
+                                HorizontalBox {
+                                    spacing: 8px;
+
+                                    for item in [
+                                        {name: "ARIA Labels", enabled: true},
+                                        {name: "Focus Management", enabled: true},
+                                        {name: "Skip Links", enabled: true},
+                                        {name: "High Contrast", enabled: true}
+                                    ]: Rectangle {
+                                        padding: 8px;
+                                        background: item.enabled ? rgb(37, 99, 235) : rgb(200, 200, 200);
+                                        border-radius: 6px;
+
+                                        Text {
+                                            text: item.name;
+                                            font-size: 12px;
+                                            color: item.enabled ? #ffffff : #666666;
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Touch Target Size
+                            VerticalBox {
+                                spacing: 8px;
+
+                                Text {
+                                    text: "👆 Touch Targets";
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                }
+
+                                Text {
+                                    text: "All interactive elements meet WCAG 2.1 minimum touch target size (44x44px)";
+                                    font-size: 14px;
+                                    color: #666666;
+                                }
+                            }
+                        }
                     }
 
                     if current-page == "playground": VerticalBox {

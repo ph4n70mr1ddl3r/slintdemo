@@ -8,7 +8,10 @@ fn test_demo_list_renders() {
     // Test that demos can be loaded
     let demos = load_demos();
     assert!(!demos.is_empty(), "Demos list should not be empty");
-    assert!(demos.len() >= 5, "Should have at least 5 demos for interactive showcase");
+    assert!(
+        demos.len() >= 5,
+        "Should have at least 5 demos for interactive showcase"
+    );
 }
 
 #[test]
@@ -17,17 +20,29 @@ fn test_demo_has_required_fields() {
     for demo in demos {
         assert!(!demo.id.is_empty(), "Demo ID should not be empty");
         assert!(!demo.title.is_empty(), "Demo title should not be empty");
-        assert!(!demo.description.is_empty(), "Demo description should not be empty");
-        assert!(!demo.category.is_empty(), "Demo category should not be empty");
-        assert!(!demo.slint_file.is_empty(), "Demo slint_file should not be empty");
+        assert!(
+            !demo.description.is_empty(),
+            "Demo description should not be empty"
+        );
+        assert!(
+            !demo.category.is_empty(),
+            "Demo category should not be empty"
+        );
+        assert!(
+            !demo.slint_file.is_empty(),
+            "Demo slint_file should not be empty"
+        );
     }
 }
 
 #[test]
 fn test_demo_categories_exist() {
     let categories = load_categories();
-    assert!(!categories.is_empty(), "Categories list should not be empty");
-    
+    assert!(
+        !categories.is_empty(),
+        "Categories list should not be empty"
+    );
+
     // Check that at least interactive category exists
     let interactive = categories.iter().find(|c| c.id == "interactive");
     assert!(interactive.is_some(), "Interactive category should exist");
@@ -50,12 +65,8 @@ fn test_demo_id_uniqueness() {
     let mut ids: Vec<&String> = demos.iter().map(|d| &d.id).collect();
     ids.sort();
     ids.dedup();
-    
-    assert_eq!(
-        ids.len(),
-        demos.len(),
-        "All demo IDs should be unique"
-    );
+
+    assert_eq!(ids.len(), demos.len(), "All demo IDs should be unique");
 }
 
 #[test]

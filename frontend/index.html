@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive showcase demonstrating Slint 1.14's web capabilities - reactive UI, performance, accessibility, and responsive design">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="keywords" content="Slint, UI, WebAssembly, reactive, performance, showcase">
+    <meta property="og:title" content="Slint 1.14 Web Capabilities Showcase">
+    <meta property="og:description" content="Interactive demonstrations of modern UI development with Slint">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Slint 1.14 Web Capabilities Showcase">
+    <meta name="twitter:description" content="Interactive demonstrations of modern UI development with Slint">
     <title>Slint 1.14 Web Capabilities Showcase</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div id="app">
@@ -15,29 +25,64 @@
         </header>
         
         <main id="showcase-container">
-            <div class="loading-state">
+            <div class="loading-state" id="loading">
                 <div class="spinner"></div>
                 <p>Loading showcase...</p>
+                <div class="progress-bar" style="width: 200px; margin-top: 16px;">
+                    <div class="progress-bar-fill" style="width: 30%;"></div>
+                </div>
+            </div>
+            
+            <div id="error-container" style="display: none;">
+                <div class="error">
+                    <h2>Oops! Something went wrong</h2>
+                    <p id="error-message">An unexpected error occurred.</p>
+                    <button onclick="location.reload()" style="margin-top: 16px; padding: 8px 16px; cursor: pointer;">
+                        Reload Page
+                    </button>
+                </div>
             </div>
         </main>
         
         <footer class="showcase-footer">
-            <p>Built with <a href="https://slint.dev">Slint</a> 1.14</p>
+            <p>Built with <a href="https://slint.dev">Slint</a> 1.14 | 
+               <a href="https://github.com/ph4n70mr1ddl3r/slintdemo">View Source</a></p>
         </footer>
     </div>
+    
+    <div id="toast-container"></div>
     
     <script type="module">
         import init from './pkg/slint_showcase_lib.js';
         
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
         async function main() {
+            const loadingEl = document.getElementById('loading');
+            const progressFill = loadingEl.querySelector('.progress-bar-fill');
+            
             try {
+                // Simulate progress
+                progressFill.style.width = '60%';
                 await init();
+                progressFill.style.width = '100%';
+                
+                // Hide loading, show app
+                loadingEl.style.display = 'none';
                 console.log('Slint showcase loaded successfully');
             } catch (e) {
                 console.error('Failed to load Slint showcase:', e);
-                document.querySelector('.loading-state').innerHTML = `
-                    <p class="error">Failed to load showcase. Please use a modern browser with WebAssembly support.</p>
-                `;
+                loadingEl.style.display = 'none';
+                document.getElementById('error-container').style.display = 'block';
+                document.getElementById('error-message').textContent = 
+                    e.message || 'Failed to load. Please use a modern browser with WebAssembly support.';
             }
         }
         

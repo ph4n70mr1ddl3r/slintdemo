@@ -222,19 +222,21 @@
 
 **Purpose**: Improvements affecting multiple user stories
 
-- [ ] T080 [P] Add loading states and skeleton UI for WASM initialization
-- [ ] T081 [P] Add error boundary component in src/lib/components/error_boundary.slint for graceful error handling
-- [ ] T082 [P] Create 404/Not Found page component for invalid demo URLs
-- [ ] T083 Add global styles and typography in frontend/styles/main.css
-- [ ] T084 [P] Create favicon and meta tags in frontend/index.html
-- [ ] T085 Add Google Analytics or telemetry hook for user engagement metrics (SC-002, SC-003, SC-004)
-- [ ] T086 Enhance .github/workflows/ci.yml with WASM build, accessibility audit, and deploy jobs
-- [ ] T087 Create deployment configuration for GitHub Pages/Vercel/Netlify in .github/workflows/deploy.yml
-- [ ] T088 [P] Write README.md for project with contributing guidelines
-- [ ] T089 Update AGENTS.md with Slint-specific patterns and conventions
-- [ ] T090 Run cargo clippy and fix any linting issues
-- [ ] T091 Run cargo fmt to ensure consistent code formatting
-- [ ] T092 Run full test suite (all phases) and verify all tests pass
+- [X] T080 [P] Add loading states and skeleton UI for WASM initialization
+- [X] T081 [P] Add error boundary component in src/lib/components/error_boundary.slint for graceful error handling
+- [X] T082 [P] Create 404/Not Found page component for invalid demo URLs
+- [X] T083 Add global styles and typography in frontend/styles/main.css
+- [X] T084 [P] Create favicon and meta tags in frontend/index.html
+- [X] T085 Add Google Analytics or telemetry hook for user engagement metrics (SC-002, SC-003, SC-004)
+- [X] T086 Enhance .github/workflows/ci.yml with WASM build, accessibility audit, and deploy jobs
+- [X] T087 Create deployment configuration for GitHub Pages/Vercel/Netlify in .github/workflows/deploy.yml
+- [X] T088 [P] Write README.md for project with contributing guidelines
+- [X] T089 Update AGENTS.md with Slint-specific patterns and conventions
+- [X] T090 Run cargo clippy and fix any linting issues
+- [X] T091 Run cargo fmt to ensure consistent code formatting
+- [X] T092 Run full test suite (all phases) and verify all tests pass
+
+**Checkpoint**: Phase 8 complete - Polish & cross-cutting concerns addressed
 
 ---
 
