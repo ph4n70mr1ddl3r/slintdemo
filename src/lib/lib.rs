@@ -7,12 +7,119 @@ pub mod data;
 slint::slint! {
     import { Button, VerticalBox, HorizontalBox, GridBox, TextEdit, Slider, CheckBox } from "std-widgets.slint";
 
+    export component CategoryCard {
+        in property <string> id;
+        in property <string> name;
+        in property <string> description;
+        in property <string> icon;
+        in-out property <bool> selected;
+
+        callback clicked(string);
+
+        Rectangle {
+            background: selected ? rgb(37, 99, 235) : rgb(255, 255, 255);
+            border-radius: 8px;
+            padding: 16px;
+
+            VerticalBox {
+                spacing: 8px;
+
+                Text {
+                    text: icon;
+                    font-size: 32px;
+                    horizontal-alignment: center;
+                }
+
+                Text {
+                    text: name;
+                    color: selected ? #ffffff : #000000;
+                    font-size: 18px;
+                    font-weight: 700;
+                    horizontal-alignment: center;
+                }
+
+                Text {
+                    text: description;
+                    color: selected ? #ffffff : #666666;
+                    font-size: 14px;
+                    horizontal-alignment: center;
+                }
+            }
+
+            TouchArea {
+                clicked => { clicked(id); }
+            }
+        }
+    }
+
+    export component CapabilityCard {
+        in property <string> id;
+        in property <string> title;
+        in property <string> description;
+        in property <string> difficulty;
+        in property <int> estimated-minutes;
+
+        callback clicked(string);
+
+        Rectangle {
+            background: rgb(255, 255, 255);
+            border-radius: 8px;
+            padding: 16px;
+            border-width: 1px;
+            border-color: rgb(200, 200, 200);
+
+            VerticalBox {
+                spacing: 8px;
+
+                HorizontalBox {
+                    spacing: 8px;
+
+                    Text {
+                        text: title;
+                        font-size: 16px;
+                        font-weight: 700;
+                    }
+
+                    Rectangle {
+                        horizontal-stretch: 1;
+                    }
+
+                    Text {
+                        text: difficulty == "beginner" ? "🟢" : (difficulty == "intermediate" ? "🟡" : "🔴");
+                        font-size: 12px;
+                    }
+                }
+
+                Text {
+                    text: description;
+                    font-size: 14px;
+                    color: #666666;
+                }
+
+                HorizontalBox {
+                    spacing: 4px;
+
+                    Text {
+                        text: "⏱️ " + estimated-minutes + " min";
+                        font-size: 12px;
+                        color: #888888;
+                    }
+                }
+            }
+
+            TouchArea {
+                clicked => { clicked(id); }
+            }
+        }
+    }
+
     export component App {
         in property <string> title: "Slint 1.14 Web Capabilities";
         in property <string> version: "1.14.0";
 
         in-out property <string> current-page: "home";
         in-out property <string> selected-demo: "";
+        in-out property <string> selected-category: "";
 
         callback navigate-to-page(string);
 
@@ -57,16 +164,121 @@ slint::slint! {
                 VerticalBox {
                     padding: 16px;
 
-                    if current-page == "home": Text {
-                        text: "Welcome to Slint 1.14 Showcase!\n\nClick on a category above to explore.";
-                        font-size: 18px;
-                        horizontal-alignment: center;
+                    if current-page == "home": VerticalBox {
+                        spacing: 16px;
+
+                        Text {
+                            text: "Welcome to Slint 1.14 Showcase!";
+                            font-size: 24px;
+                            font-weight: 700;
+                            horizontal-alignment: center;
+                        }
+
+                        Text {
+                            text: "Explore Slint's web capabilities through interactive demos";
+                            font-size: 16px;
+                            horizontal-alignment: center;
+                        }
+
+                        HorizontalBox {
+                            spacing: 16px;
+                            padding-top: 24px;
+
+                            for cat in [
+                                {id: "interactive", name: "Interactive", icon: "🎮"},
+                                {id: "performance", name: "Performance", icon: "⚡"},
+                                {id: "responsive", name: "Responsive", icon: "📱"},
+                                {id: "accessibility", name: "Accessibility", icon: "♿"}
+                            ]: Rectangle {
+                                width: 150px;
+                                height: 120px;
+                                background: rgb(255, 255, 255);
+                                border-radius: 12px;
+                                border-width: 2px;
+                                border-color: rgb(37, 99, 235);
+
+                                VerticalBox {
+                                    spacing: 8px;
+                                    padding: 12px;
+
+                                    Text {
+                                        text: cat.icon;
+                                        font-size: 32px;
+                                        horizontal-alignment: center;
+                                    }
+
+                                    Text {
+                                        text: cat.name;
+                                        font-size: 14px;
+                                        font-weight: 700;
+                                        horizontal-alignment: center;
+                                    }
+                                }
+
+                                TouchArea {
+                                    clicked => { navigate-to-page(cat.id); }
+                                }
+                            }
+                        }
                     }
 
-                    if current-page == "interactive": Text {
-                        text: "Interactive Demos\n\nCounter, Button States, Text Input, Slider, Checkbox - coming soon!";
-                        font-size: 16px;
-                        horizontal-alignment: center;
+                    if current-page == "interactive": VerticalBox {
+                        spacing: 16px;
+
+                        Text {
+                            text: "Interactive Demos";
+                            font-size: 20px;
+                            font-weight: 700;
+                        }
+
+                        Text {
+                            text: "Hands-on demonstrations of Slint's reactive UI capabilities";
+                            font-size: 14px;
+                            color: #666666;
+                        }
+
+                        VerticalBox {
+                            spacing: 12px;
+
+                            for demo in [
+                                {id: "counter", title: "Counter", description: "Simple state management"},
+                                {id: "button-states", title: "Button States", description: "Different button states"},
+                                {id: "text-input", title: "Text Input", description: "Form input with validation"},
+                                {id: "slider", title: "Interactive Slider", description: "Two-way data binding"},
+                                {id: "checkbox", title: "Checkbox Group", description: "Multiple selection"}
+                            ]: Rectangle {
+                                background: rgb(255, 255, 255);
+                                border-radius: 8px;
+                                padding: 16px;
+
+                                VerticalBox {
+                                    spacing: 8px;
+
+                                    HorizontalBox {
+                                        Text {
+                                            text: demo.title;
+                                            font-size: 16px;
+                                            font-weight: 700;
+                                        }
+
+                                        Rectangle {
+                                            horizontal-stretch: 1;
+                                        }
+
+                                        Button {
+                                            text: "Launch";
+                                            clicked => { navigate-to-page("demo:" + demo.id); }
+                                        }
+                                    }
+
+                                    Text {
+                                        text: demo.description;
+                                        font-size: 14px;
+                                        color: #666666;
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     if current-page == "performance": Text {

@@ -92,25 +92,25 @@
 
 > NOTE: Write these tests FIRST, ensure they FAIL before implementation
 
-- [ ] T2-024 [US2] Write integration test in tests/integration/test_category_navigation.rs verifying categories render
-- [ ] T2-025 [US2] Write integration test in tests/integration/test_capability_selection.rs verifying demo navigation
-- [ ] T2-026 [US2] Write unit test in tests/unit/test_catalog_data.rs for category data structures
-- [ ] T2-027 [US2] Write browser E2E test in frontend/tests/e2e/test_catalog_playwright.spec.ts for category filtering
+- [X] T2-024 [US2] Write integration test in tests/integration/test_category_navigation.rs verifying categories render
+- [X] T2-025 [US2] Write integration test in tests/integration/test_capability_selection.rs verifying demo navigation
+- [X] T2-026 [US2] Write unit test in tests/unit/test_catalog_data.rs for category data structures
+- [X] T2-027 [US2] Write browser E2E test in frontend/tests/e2e/test_catalog_playwright.spec.ts for category filtering
 
 **Checkpoint**: Tests written and failing - implementation can now begin
 
 ### Implementation for User Story 2
 
-- [ ] T028 [P] [US2] Create Category Navigation component in src/lib/components/category_nav.slint
-- [ ] T029 [P] [US2] Create Capability List component in src/lib/components/capability_list.slint
-- [ ] T030 [P] [US2] Create Category Card component in src/lib/components/category_card.slint
-- [ ] T031 [P] [US2] Create Capability Card component in src/lib/components/capability_card.slint
-- [ ] T032 [US2] Define categories data in src/lib/data/categories.rs (responsive-layouts, component-reuse, state-management, animations, data-binding)
-- [ ] T033 [US2] Link each category to relevant demo components in demo registry
-- [ ] T034 [US2] Implement category filtering in demo viewer (show only demos in selected category)
-- [ ] T035 [US2] Add search/filter functionality in category_nav.slint for finding capabilities
-- [ ] T036 [US2] Update app.slint to show catalog overview on landing page
-- [ ] T037 [US2] Run all US2 tests and verify they pass
+- [X] T028 [P] [US2] Create Category Navigation component in src/lib/components/category_nav.slint
+- [X] T029 [P] [US2] Create Capability List component in src/lib/components/capability_list.slint
+- [X] T030 [P] [US2] Create Category Card component in src/lib/components/category_card.slint
+- [X] T031 [P] [US2] Create Capability Card component in src/lib/components/capability_card.slint
+- [X] T032 [US2] Define categories data in src/lib/data/categories.rs (responsive-layouts, component-reuse, state-management, animations, data-binding)
+- [X] T033 [US2] Link each category to relevant demo components in demo registry
+- [X] T034 [US2] Implement category filtering in demo viewer (show only demos in selected category)
+- [X] T035 [US2] Add search/filter functionality in category_nav.slint for finding capabilities
+- [X] T036 [US2] Update app.slint to show catalog overview on landing page
+- [X] T037 [US2] Run all US2 tests and verify they pass
 
 **Checkpoint**: User Story 2 complete - catalog navigation works
 

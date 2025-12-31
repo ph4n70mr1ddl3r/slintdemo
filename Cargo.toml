@@ -4,16 +4,6 @@ members = [
     "src/bin",
 ]
 
-[package]
-name = "slint-showcase"
-version = "0.1.0"
-edition = "2021"
-authors = ["Slint Demo"]
-description = "Web showcase demonstrating Slint 1.14 capabilities"
-
 [profile.release]
 opt-level = "z"
 lto = true
-
-[target.wasm32-unknown-unknown]
-rustflags = ["-C", "link-arg=-s"]
