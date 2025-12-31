@@ -227,14 +227,14 @@
 - [ ] T082 [P] Create 404/Not Found page component for invalid demo URLs
 - [ ] T083 Add global styles and typography in frontend/styles/main.css
 - [ ] T084 [P] Create favicon and meta tags in frontend/index.html
-- [ ] T085 Add Google Analytics or telemetry hook (optional, per plan assumptions)
-- [ ] T086 Create .github/workflows/ci.yml with cargo build, cargo test, cargo clippy, cargo fmt checks
+- [ ] T085 Add Google Analytics or telemetry hook for user engagement metrics (SC-002, SC-003, SC-004)
+- [ ] T086 Enhance .github/workflows/ci.yml with WASM build, accessibility audit, and deploy jobs
 - [ ] T087 Create deployment configuration for GitHub Pages/Vercel/Netlify in .github/workflows/deploy.yml
 - [ ] T088 [P] Write README.md for project with contributing guidelines
-- [ ] T088 Update AGENTS.md with Slint-specific patterns and conventions
-- [ ] T089 Run cargo clippy and fix any linting issues
-- [ ] T090 Run cargo fmt to ensure consistent code formatting
-- [ ] T091 Run full test suite (all phases) and verify all tests pass
+- [ ] T089 Update AGENTS.md with Slint-specific patterns and conventions
+- [ ] T090 Run cargo clippy and fix any linting issues
+- [ ] T091 Run cargo fmt to ensure consistent code formatting
+- [ ] T092 Run full test suite (all phases) and verify all tests pass
 
 ---
 
@@ -252,7 +252,7 @@
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
-- **User Story 2 (P1)**: Can start after Foundational (Phase 2) - Uses demo registry from US1 (T019)
+- **User Story 2 (P1)**: Can start after Foundational (Phase 2) AND User Story 1 completion - requires demo registry (T019) and all 5 demo components (T014-T018)
 - **User Story 3 (P2)**: Can start after Foundational (Phase 2) - Independent data model
 - **User Story 4 (P2)**: Can start after Foundational (Phase 2) - Independent code examples
 - **User Story 5 (P3)**: Can start after Foundational (Phase 2) - Builds on all other components
@@ -324,10 +324,10 @@ With multiple developers:
 
 | Metric | Value |
 |--------|-------|
-| **Total Tasks** | 91 |
+| **Total Tasks** | 92 |
 | **Test Tasks** | 16 (4 per user story) |
-| **Implementation Tasks** | 67 |
-| **CI Task** | 1 |
+| **Implementation Tasks** | 68 |
+| **CI/Polish Tasks** | 8 |
 | **Setup Phase** | 7 tasks |
 | **Foundational Phase** | 8 tasks |
 | **User Story 1** | 18 tasks (4 tests + 10 impl + 4 verify) |
@@ -335,7 +335,7 @@ With multiple developers:
 | **User Story 3** | 18 tasks (4 tests + 10 impl + 4 verify) |
 | **User Story 4** | 18 tasks (4 tests + 10 impl + 4 verify) |
 | **User Story 5** | 18 tasks (4 tests + 10 impl + 4 verify) |
-| **Polish Phase** | 12 tasks |
+| **Polish Phase** | 14 tasks |
 | **Parallel Tasks** | ~45 (marked with [P]) |
 
 **MVP Scope**: User Story 1 (Phase 3) after Setup + Foundational with passing tests

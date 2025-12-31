@@ -99,10 +99,17 @@ The showcase demonstrates that Slint applications work consistently across diffe
 
 ### Edge Cases
 
-- What happens when a visitor has an outdated browser that doesn't support WebAssembly?
-- How does the showcase handle visitors with JavaScript disabled?
-- What occurs when network connectivity is lost during interaction with a demonstration?
-- How does the showcase present information to visitors using assistive technologies?
+- **Outdated Browser (No WASM Support)**: 
+  - **Given** a visitor has an outdated browser that doesn't support WebAssembly, **When** they access the showcase, **Then** they see a banner informing them their browser is unsupported with a link to upgrade instructions, and the static content remains accessible.
+
+- **JavaScript Disabled**:
+  - **Given** a visitor has JavaScript disabled in their browser, **When** they access the showcase, **Then** they see a message explaining that JavaScript is required with instructions to enable it.
+
+- **Network Connectivity Lost**:
+  - **Given** a visitor is interacting with a demonstration, **When** network connectivity is lost, **Then** the showcase displays cached content with a "You appear to be offline" notice, and previously loaded demonstrations continue to function.
+
+- **Assistive Technologies**:
+  - **Given** a visitor uses assistive technologies (screen reader, keyboard-only navigation), **When** they navigate the showcase, **Then** all interactive elements are accessible via keyboard, have proper ARIA labels, and screen readers can announce all content correctly.
 
 ## Requirements *(mandatory)*
 
