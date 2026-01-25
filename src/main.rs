@@ -19,13 +19,13 @@ async fn main() -> std::io::Result<()> {
             )
         })?;
 
-    let bind_address = format!("{}:{}", host, port);
-    info!("Starting server on {}", bind_address);
+    let bind_address = format!("{host}:{port}");
+    info!("Starting server on {bind_address}");
 
     HttpServer::new(|| App::new().configure(hello_world::configure_app))
         .bind(&bind_address)
         .map_err(|e| {
-            log::error!("Failed to bind to {}: {}", bind_address, e);
+            log::error!("Failed to bind to {bind_address}: {e}");
             e
         })?
         .run()
