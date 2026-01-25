@@ -1,3 +1,7 @@
+//! Hello World web service module
+//!
+//! Provides a simple HTTP endpoint that returns HTML content.
+
 use actix_web::{web, HttpResponse};
 
 const HELLO_HTML: &str = "<html><body><h1>Hello World</h1></body></html>";
@@ -23,7 +27,7 @@ mod tests {
         assert_eq!(response.status(), 200);
         assert_eq!(response.headers().get("content-type").unwrap(), "text/html");
         let body = to_bytes(response.into_body()).await.unwrap();
-        let body_str = String::from_utf8(body.to_vec()).unwrap();
+        let body_str = std::str::from_utf8(&body).unwrap();
         assert_eq!(body_str, HELLO_HTML);
     }
 }
