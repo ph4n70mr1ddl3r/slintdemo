@@ -16,12 +16,19 @@ pub const HELLO_HTML: &str = "<!DOCTYPE html>
 </body>
 </html>";
 
+/// Handles GET requests to the root path.
+///
+/// Returns a simple "Hello World" HTML page.
 pub async fn hello_handler() -> HttpResponse {
     HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
         .body(HELLO_HTML)
 }
 
+/// Configures the Actix-web application routes.
+///
+/// # Arguments
+/// * `cfg` - The Actix-web service configuration to add routes to
 pub fn configure_app(cfg: &mut web::ServiceConfig) {
     cfg.route("/", web::get().to(hello_handler));
 }

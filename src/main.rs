@@ -5,6 +5,7 @@ use std::env;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+    log::info!("Starting Hello World server");
 
     let host = env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
     let port = env::var("PORT")
@@ -22,7 +23,11 @@ async fn main() -> std::io::Result<()> {
     info!("Starting server on {}", bind_address);
 
     HttpServer::new(|| App::new().configure(hello_world::configure_app))
-        .bind(&bind_address)?
+        .bind(&bind_address)
+        .map_err(|e| {
+            log::error!("Failed to bind to {}: {}", bind_address, e);
+            e
+        })?
         .run()
         .await
 }
