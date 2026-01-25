@@ -10,7 +10,10 @@ async fn main() -> std::io::Result<()> {
     let port = env::var("PORT")
         .unwrap_or_else(|_| "8080".to_string())
         .parse::<u16>()
-        .unwrap_or_else(|e| panic!("Invalid PORT value: {e}"));
+        .map_err(|e| {
+            log::error!("Invalid PORT value: {e}");
+            std::io::Error::new(std::io::ErrorKind::InvalidInput, format!("Invalid PORT value: {e}"))
+        })?;
 
     let bind_address = format!("{}:{}", host, port);
     info!("Starting server on {}", bind_address);
