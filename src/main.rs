@@ -12,7 +12,10 @@ async fn main() -> std::io::Result<()> {
         .parse::<u16>()
         .map_err(|e| {
             log::error!("Invalid PORT value: {e}");
-            std::io::Error::new(std::io::ErrorKind::InvalidInput, format!("Invalid PORT value: {e}"))
+            std::io::Error::new(
+                std::io::ErrorKind::InvalidInput,
+                format!("Invalid PORT value: {e}"),
+            )
         })?;
 
     let bind_address = format!("{}:{}", host, port);
