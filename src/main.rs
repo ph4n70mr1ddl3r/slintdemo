@@ -1,5 +1,5 @@
 use actix_web::{App, HttpServer};
-use log::{error, info};
+use log::info;
 use std::env;
 
 #[actix_web::main]
@@ -10,7 +10,7 @@ async fn main() -> std::io::Result<()> {
     let port = env::var("PORT")
         .unwrap_or_else(|_| "8080".to_string())
         .parse::<u16>()
-        .unwrap_or(8080);
+        .expect("PORT must be a valid u16");
 
     let bind_address = format!("{}:{}", host, port);
     info!("Starting server on {}", bind_address);
@@ -19,8 +19,4 @@ async fn main() -> std::io::Result<()> {
         .bind(&bind_address)?
         .run()
         .await
-        .map_err(|e| {
-            error!("Server error: {}", e);
-            e
-        })
 }
