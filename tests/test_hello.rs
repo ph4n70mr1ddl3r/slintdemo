@@ -20,3 +20,15 @@ async fn test_get_hello_returns_html() {
     let body_str = std::str::from_utf8(&body).unwrap();
     assert_eq!(body_str, HELLO_HTML);
 }
+
+#[actix_web::test]
+async fn test_unknown_route_returns_404() {
+    let app = test::init_service(App::new().configure(|app| {
+        configure_app(app);
+    }))
+    .await;
+
+    let req = test::TestRequest::get().uri("/unknown").to_request();
+    let resp = test::call_service(&app, req).await;
+    assert_eq!(resp.status(), 404);
+}

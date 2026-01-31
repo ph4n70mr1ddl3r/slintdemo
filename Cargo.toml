@@ -2,6 +2,8 @@
 name = "hello-world"
 version = "0.1.0"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "A simple Hello World web service"
 
 [lib]
 path = "src/lib.rs"
@@ -10,3 +12,6 @@ path = "src/lib.rs"
 actix-web = "4"
 env_logger = "0.11"
 log = "0.4"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
