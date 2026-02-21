@@ -41,6 +41,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
+            .wrap(middleware::Logger::default())
             .wrap(middleware::Compress::default())
             .app_data(web::PayloadConfig::new(MAX_PAYLOAD_SIZE))
             .configure(hello_world::configure_app)

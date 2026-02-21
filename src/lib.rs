@@ -78,36 +78,65 @@ mod tests {
         let response = hello_handler().await;
         assert_eq!(response.status(), 200);
         assert_eq!(
-            response.headers().get("content-type").unwrap(),
+            response
+                .headers()
+                .get("content-type")
+                .expect("content-type header should be present"),
             "text/html; charset=utf-8"
         );
         assert_eq!(
-            response.headers().get("x-content-type-options").unwrap(),
+            response
+                .headers()
+                .get("x-content-type-options")
+                .expect("x-content-type-options header should be present"),
             "nosniff"
         );
-        assert_eq!(response.headers().get("x-frame-options").unwrap(), "DENY");
         assert_eq!(
-            response.headers().get("x-xss-protection").unwrap(),
+            response
+                .headers()
+                .get("x-frame-options")
+                .expect("x-frame-options header should be present"),
+            "DENY"
+        );
+        assert_eq!(
+            response
+                .headers()
+                .get("x-xss-protection")
+                .expect("x-xss-protection header should be present"),
             "1; mode=block"
         );
         assert_eq!(
-            response.headers().get("content-security-policy").unwrap(),
+            response
+                .headers()
+                .get("content-security-policy")
+                .expect("content-security-policy header should be present"),
             "default-src 'self'"
         );
         assert_eq!(
-            response.headers().get("strict-transport-security").unwrap(),
+            response
+                .headers()
+                .get("strict-transport-security")
+                .expect("strict-transport-security header should be present"),
             "max-age=31536000; includeSubDomains"
         );
         assert_eq!(
-            response.headers().get("referrer-policy").unwrap(),
+            response
+                .headers()
+                .get("referrer-policy")
+                .expect("referrer-policy header should be present"),
             "strict-origin-when-cross-origin"
         );
         assert_eq!(
-            response.headers().get("permissions-policy").unwrap(),
+            response
+                .headers()
+                .get("permissions-policy")
+                .expect("permissions-policy header should be present"),
             "geolocation=(), microphone=(), camera=()"
         );
-        let body = to_bytes(response.into_body()).await.unwrap();
-        let body_str = std::str::from_utf8(&body).unwrap();
+        let body = to_bytes(response.into_body())
+            .await
+            .expect("Body should be readable");
+        let body_str = std::str::from_utf8(&body).expect("Body should be valid UTF-8");
         assert_eq!(body_str, HELLO_HTML);
     }
 
@@ -116,15 +145,23 @@ mod tests {
         let response = health_handler().await;
         assert_eq!(response.status(), 200);
         assert_eq!(
-            response.headers().get("content-type").unwrap(),
+            response
+                .headers()
+                .get("content-type")
+                .expect("content-type header should be present"),
             "application/json"
         );
         assert_eq!(
-            response.headers().get("referrer-policy").unwrap(),
+            response
+                .headers()
+                .get("referrer-policy")
+                .expect("referrer-policy header should be present"),
             "no-referrer"
         );
-        let body = to_bytes(response.into_body()).await.unwrap();
-        let body_str = std::str::from_utf8(&body).unwrap();
+        let body = to_bytes(response.into_body())
+            .await
+            .expect("Body should be readable");
+        let body_str = std::str::from_utf8(&body).expect("Body should be valid UTF-8");
         assert_eq!(body_str, r#"{"status":"healthy"}"#);
     }
 }

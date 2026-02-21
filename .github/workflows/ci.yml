@@ -35,3 +35,6 @@ jobs:
       uses: rustsec/audit-check@v2.0.0
       with:
         ignore: RUSTSEC-2024-0436
+      # RUSTSEC-2024-0436: Unmaintained crate advisory for 'proc-macro-error'
+      # This is a transitive dependency with no direct usage in this project.
+      # No vulnerability exists - only maintenance status warning.
