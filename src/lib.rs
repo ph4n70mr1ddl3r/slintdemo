@@ -13,6 +13,7 @@ pub const HELLO_HTML: &str = "<!DOCTYPE html>
 </head>
 <body>
     <h1>Hello World</h1>
+    <p>A simple web service built with Actix.</p>
 </body>
 </html>";
 
