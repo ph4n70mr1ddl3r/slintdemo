@@ -6,6 +6,23 @@
 
 use actix_web::{web, HttpResponse};
 
+fn add_security_headers(builder: &mut actix_web::HttpResponseBuilder) {
+    builder
+        .insert_header(("X-Content-Type-Options", "nosniff"))
+        .insert_header(("X-Frame-Options", "DENY"))
+        .insert_header(("X-XSS-Protection", "1; mode=block"))
+        .insert_header(("Referrer-Policy", "strict-origin-when-cross-origin"))
+        .insert_header(("Content-Security-Policy", "default-src 'self'"))
+        .insert_header((
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+        ))
+        .insert_header((
+            "Permissions-Policy",
+            "geolocation=(), microphone=(), camera=()",
+        ));
+}
+
 /// HTML content for the Hello World page.
 pub const HELLO_HTML: &str = "<!DOCTYPE html>
 <html lang=\"en\">
@@ -24,23 +41,11 @@ pub const HELLO_HTML: &str = "<!DOCTYPE html>
 ///
 /// Returns a simple "Hello World" HTML page with security headers.
 pub async fn hello_handler() -> HttpResponse {
-    HttpResponse::Ok()
-        .content_type("text/html; charset=utf-8")
-        .insert_header(("X-Content-Type-Options", "nosniff"))
-        .insert_header(("X-Frame-Options", "DENY"))
-        .insert_header(("X-XSS-Protection", "1; mode=block"))
-        .insert_header(("Cache-Control", "no-cache"))
-        .insert_header(("Content-Security-Policy", "default-src 'self'"))
-        .insert_header((
-            "Strict-Transport-Security",
-            "max-age=31536000; includeSubDomains",
-        ))
-        .insert_header(("Referrer-Policy", "strict-origin-when-cross-origin"))
-        .insert_header((
-            "Permissions-Policy",
-            "geolocation=(), microphone=(), camera=()",
-        ))
-        .body(HELLO_HTML)
+    let mut response = HttpResponse::Ok();
+    response.content_type("text/html; charset=utf-8");
+    add_security_headers(&mut response);
+    response.insert_header(("Cache-Control", "no-cache"));
+    response.body(HELLO_HTML)
 }
 
 /// Handles GET requests to the health check endpoint.

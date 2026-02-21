@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "A simple Hello World web service"
+repository = "https://github.com/anomalyco/slintdemo"
+keywords = ["actix", "web", "http", "server"]
+categories = ["web-programming::http-server"]
 
 [lib]
 name = "hello_world"
