@@ -1,11 +1,22 @@
+//! Hello World web server
+//!
+//! A simple HTTP server built with Actix-web that serves a Hello World page.
+
+#![warn(missing_docs)]
+
 use actix_web::{middleware, web, App, HttpServer};
 use log::{error, info};
 use std::{env, time::Duration};
 
+/// Maximum request payload size in bytes (1 MB).
 const MAX_PAYLOAD_SIZE: usize = 1024 * 1024;
+/// HTTP keep-alive timeout in seconds.
 const KEEP_ALIVE_SECS: u64 = 75;
+/// Graceful shutdown timeout in seconds.
 const SHUTDOWN_TIMEOUT_SECS: u64 = 30;
+/// Default host address to bind to.
 const DEFAULT_HOST: &str = "127.0.0.1";
+/// Default port to listen on.
 const DEFAULT_PORT: u16 = 8080;
 
 #[actix_web::main]
