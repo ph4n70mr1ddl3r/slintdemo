@@ -35,6 +35,11 @@ pub async fn hello_handler() -> HttpResponse {
             "Strict-Transport-Security",
             "max-age=31536000; includeSubDomains",
         ))
+        .insert_header(("Referrer-Policy", "strict-origin-when-cross-origin"))
+        .insert_header((
+            "Permissions-Policy",
+            "geolocation=(), microphone=(), camera=()",
+        ))
         .body(HELLO_HTML)
 }
 
@@ -45,6 +50,7 @@ pub async fn health_handler() -> HttpResponse {
     HttpResponse::Ok()
         .content_type("application/json")
         .insert_header(("Cache-Control", "no-store"))
+        .insert_header(("Referrer-Policy", "no-referrer"))
         .body(r#"{"status":"healthy"}"#)
 }
 
@@ -87,6 +93,14 @@ mod tests {
             response.headers().get("strict-transport-security").unwrap(),
             "max-age=31536000; includeSubDomains"
         );
+        assert_eq!(
+            response.headers().get("referrer-policy").unwrap(),
+            "strict-origin-when-cross-origin"
+        );
+        assert_eq!(
+            response.headers().get("permissions-policy").unwrap(),
+            "geolocation=(), microphone=(), camera=()"
+        );
         let body = to_bytes(response.into_body()).await.unwrap();
         let body_str = std::str::from_utf8(&body).unwrap();
         assert_eq!(body_str, HELLO_HTML);
@@ -99,6 +113,10 @@ mod tests {
         assert_eq!(
             response.headers().get("content-type").unwrap(),
             "application/json"
+        );
+        assert_eq!(
+            response.headers().get("referrer-policy").unwrap(),
+            "no-referrer"
         );
         let body = to_bytes(response.into_body()).await.unwrap();
         let body_str = std::str::from_utf8(&body).unwrap();

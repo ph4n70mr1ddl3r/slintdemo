@@ -16,6 +16,10 @@ async fn test_get_hello_returns_html() {
         resp.headers().get("x-content-type-options").unwrap(),
         "nosniff"
     );
+    assert_eq!(
+        resp.headers().get("referrer-policy").unwrap(),
+        "strict-origin-when-cross-origin"
+    );
 
     let body = test::read_body(resp).await;
     let body_str = std::str::from_utf8(&body).unwrap();
@@ -32,6 +36,10 @@ async fn test_health_endpoint_returns_healthy() {
     assert_eq!(
         resp.headers().get("content-type").unwrap(),
         "application/json"
+    );
+    assert_eq!(
+        resp.headers().get("referrer-policy").unwrap(),
+        "no-referrer"
     );
 
     let body = test::read_body(resp).await;
