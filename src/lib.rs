@@ -19,11 +19,25 @@ pub const HELLO_HTML: &str = "<!DOCTYPE html>
 
 /// Handles GET requests to the root path.
 ///
-/// Returns a simple "Hello World" HTML page.
+/// Returns a simple "Hello World" HTML page with security headers.
 pub async fn hello_handler() -> HttpResponse {
     HttpResponse::Ok()
         .content_type("text/html; charset=utf-8")
+        .insert_header(("X-Content-Type-Options", "nosniff"))
+        .insert_header(("X-Frame-Options", "DENY"))
+        .insert_header(("X-XSS-Protection", "1; mode=block"))
+        .insert_header(("Cache-Control", "no-cache"))
         .body(HELLO_HTML)
+}
+
+/// Handles GET requests to the health check endpoint.
+///
+/// Returns a simple JSON response indicating the service is healthy.
+pub async fn health_handler() -> HttpResponse {
+    HttpResponse::Ok()
+        .content_type("application/json")
+        .insert_header(("Cache-Control", "no-store"))
+        .body(r#"{"status":"healthy"}"#)
 }
 
 /// Configures the Actix-web application routes.
@@ -31,7 +45,8 @@ pub async fn hello_handler() -> HttpResponse {
 /// # Arguments
 /// * `cfg` - The Actix-web service configuration to add routes to
 pub fn configure_app(cfg: &mut web::ServiceConfig) {
-    cfg.route("/", web::get().to(hello_handler));
+    cfg.route("/", web::get().to(hello_handler))
+        .route("/health", web::get().to(health_handler));
 }
 
 #[cfg(test)]
@@ -47,8 +62,30 @@ mod tests {
             response.headers().get("content-type").unwrap(),
             "text/html; charset=utf-8"
         );
+        assert_eq!(
+            response.headers().get("x-content-type-options").unwrap(),
+            "nosniff"
+        );
+        assert_eq!(response.headers().get("x-frame-options").unwrap(), "DENY");
+        assert_eq!(
+            response.headers().get("x-xss-protection").unwrap(),
+            "1; mode=block"
+        );
         let body = to_bytes(response.into_body()).await.unwrap();
         let body_str = std::str::from_utf8(&body).unwrap();
         assert_eq!(body_str, HELLO_HTML);
+    }
+
+    #[actix_web::test]
+    async fn test_health_handler_returns_healthy() {
+        let response = health_handler().await;
+        assert_eq!(response.status(), 200);
+        assert_eq!(
+            response.headers().get("content-type").unwrap(),
+            "application/json"
+        );
+        let body = to_bytes(response.into_body()).await.unwrap();
+        let body_str = std::str::from_utf8(&body).unwrap();
+        assert_eq!(body_str, r#"{"status":"healthy"}"#);
     }
 }

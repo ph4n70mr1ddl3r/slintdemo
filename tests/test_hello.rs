@@ -12,6 +12,10 @@ async fn test_get_hello_returns_html() {
         resp.headers().get("content-type").unwrap(),
         "text/html; charset=utf-8"
     );
+    assert_eq!(
+        resp.headers().get("x-content-type-options").unwrap(),
+        "nosniff"
+    );
 
     let body = test::read_body(resp).await;
     let body_str = std::str::from_utf8(&body).unwrap();
@@ -19,10 +23,36 @@ async fn test_get_hello_returns_html() {
 }
 
 #[actix_web::test]
+async fn test_health_endpoint_returns_healthy() {
+    let app = test::init_service(App::new().configure(configure_app)).await;
+
+    let req = test::TestRequest::get().uri("/health").to_request();
+    let resp = test::call_service(&app, req).await;
+    assert_eq!(resp.status(), 200);
+    assert_eq!(
+        resp.headers().get("content-type").unwrap(),
+        "application/json"
+    );
+
+    let body = test::read_body(resp).await;
+    let body_str = std::str::from_utf8(&body).unwrap();
+    assert_eq!(body_str, r#"{"status":"healthy"}"#);
+}
+
+#[actix_web::test]
 async fn test_unknown_route_returns_404() {
     let app = test::init_service(App::new().configure(configure_app)).await;
 
     let req = test::TestRequest::get().uri("/unknown").to_request();
+    let resp = test::call_service(&app, req).await;
+    assert_eq!(resp.status(), 404);
+}
+
+#[actix_web::test]
+async fn test_post_to_root_returns_404() {
+    let app = test::init_service(App::new().configure(configure_app)).await;
+
+    let req = test::TestRequest::post().uri("/").to_request();
     let resp = test::call_service(&app, req).await;
     assert_eq!(resp.status(), 404);
 }

@@ -4,6 +4,7 @@ use std::{env, time::Duration};
 
 const MAX_PAYLOAD_SIZE: usize = 1024 * 1024;
 const KEEP_ALIVE_SECS: u64 = 75;
+const SHUTDOWN_TIMEOUT_SECS: u64 = 30;
 const DEFAULT_HOST: &str = "127.0.0.1";
 const DEFAULT_PORT: u16 = 8080;
 
@@ -34,6 +35,7 @@ async fn main() -> std::io::Result<()> {
             .configure(hello_world::configure_app)
     })
     .keep_alive(Duration::from_secs(KEEP_ALIVE_SECS))
+    .shutdown_timeout(SHUTDOWN_TIMEOUT_SECS)
     .bind(&bind_address)
     .map_err(|e| std::io::Error::new(e.kind(), format!("Failed to bind to {bind_address}: {e}")))?
     .run()
