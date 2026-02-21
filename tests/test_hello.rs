@@ -3,10 +3,7 @@ use hello_world::{configure_app, HELLO_HTML};
 
 #[actix_web::test]
 async fn test_get_hello_returns_html() {
-    let app = test::init_service(App::new().configure(|app| {
-        configure_app(app);
-    }))
-    .await;
+    let app = test::init_service(App::new().configure(configure_app)).await;
 
     let req = test::TestRequest::get().uri("/").to_request();
     let resp = test::call_service(&app, req).await;
@@ -23,10 +20,7 @@ async fn test_get_hello_returns_html() {
 
 #[actix_web::test]
 async fn test_unknown_route_returns_404() {
-    let app = test::init_service(App::new().configure(|app| {
-        configure_app(app);
-    }))
-    .await;
+    let app = test::init_service(App::new().configure(configure_app)).await;
 
     let req = test::TestRequest::get().uri("/unknown").to_request();
     let resp = test::call_service(&app, req).await;
