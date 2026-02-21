@@ -3,9 +3,20 @@
 //! Provides a simple HTTP endpoint that returns HTML content.
 
 #![warn(missing_docs)]
+#![warn(clippy::all, clippy::pedantic)]
 
 use actix_web::{web, HttpResponse};
 
+/// Adds security-related HTTP headers to the response.
+///
+/// These headers help protect against common web vulnerabilities:
+/// - `X-Content-Type-Options`: Prevents MIME type sniffing
+/// - `X-Frame-Options`: Prevents clickjacking attacks
+/// - `X-XSS-Protection`: Enables browser XSS filtering
+/// - `Referrer-Policy`: Controls referrer information
+/// - `Content-Security-Policy`: Restricts resource loading
+/// - `Strict-Transport-Security`: Enforces HTTPS connections
+/// - `Permissions-Policy`: Restricts browser features
 fn add_security_headers(builder: &mut actix_web::HttpResponseBuilder) {
     builder
         .insert_header(("X-Content-Type-Options", "nosniff"))

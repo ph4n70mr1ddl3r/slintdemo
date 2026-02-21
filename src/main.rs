@@ -3,6 +3,7 @@
 //! A simple HTTP server built with Actix-web that serves a Hello World page.
 
 #![warn(missing_docs)]
+#![warn(clippy::all, clippy::pedantic)]
 
 use actix_web::{middleware, web, App, HttpServer};
 use log::{error, info};
