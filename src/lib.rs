@@ -2,8 +2,11 @@
 //!
 //! Provides a simple HTTP endpoint that returns HTML content.
 
+#![warn(missing_docs)]
+
 use actix_web::{web, HttpResponse};
 
+/// HTML content for the Hello World page.
 pub const HELLO_HTML: &str = "<!DOCTYPE html>
 <html lang=\"en\">
 <head>
