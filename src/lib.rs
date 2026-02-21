@@ -63,11 +63,11 @@ pub async fn hello_handler() -> HttpResponse {
 ///
 /// Returns a simple JSON response indicating the service is healthy.
 pub async fn health_handler() -> HttpResponse {
-    HttpResponse::Ok()
-        .content_type("application/json")
-        .insert_header(("Cache-Control", "no-store"))
-        .insert_header(("Referrer-Policy", "no-referrer"))
-        .body(r#"{"status":"healthy"}"#)
+    let mut response = HttpResponse::Ok();
+    response.content_type("application/json");
+    add_security_headers(&mut response);
+    response.insert_header(("Cache-Control", "no-store"));
+    response.body(r#"{"status":"healthy"}"#)
 }
 
 /// Configures the Actix-web application routes.
@@ -167,7 +167,7 @@ mod tests {
                 .headers()
                 .get("referrer-policy")
                 .expect("referrer-policy header should be present"),
-            "no-referrer"
+            "strict-origin-when-cross-origin"
         );
         let body = to_bytes(response.into_body())
             .await

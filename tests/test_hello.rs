@@ -54,7 +54,7 @@ async fn test_health_endpoint_returns_healthy() {
         resp.headers()
             .get("referrer-policy")
             .expect("referrer-policy header should be present"),
-        "no-referrer"
+        "strict-origin-when-cross-origin"
     );
 
     let body = test::read_body(resp).await;
