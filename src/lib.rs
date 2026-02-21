@@ -30,6 +30,11 @@ pub async fn hello_handler() -> HttpResponse {
         .insert_header(("X-Frame-Options", "DENY"))
         .insert_header(("X-XSS-Protection", "1; mode=block"))
         .insert_header(("Cache-Control", "no-cache"))
+        .insert_header(("Content-Security-Policy", "default-src 'self'"))
+        .insert_header((
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains",
+        ))
         .body(HELLO_HTML)
 }
 
@@ -73,6 +78,14 @@ mod tests {
         assert_eq!(
             response.headers().get("x-xss-protection").unwrap(),
             "1; mode=block"
+        );
+        assert_eq!(
+            response.headers().get("content-security-policy").unwrap(),
+            "default-src 'self'"
+        );
+        assert_eq!(
+            response.headers().get("strict-transport-security").unwrap(),
+            "max-age=31536000; includeSubDomains"
         );
         let body = to_bytes(response.into_body()).await.unwrap();
         let body_str = std::str::from_utf8(&body).unwrap();

@@ -28,7 +28,7 @@ The server will start on http://localhost:8080
 curl http://localhost:8080
 ```
 
-Expected output: `<html><body><h1>Hello World</h1></body></html>`
+Expected output: A full HTML5 document with `<!DOCTYPE html>` and "Hello World" heading
 
 ## Run Tests
 
